@@ -53,10 +53,7 @@ let dir windows form a nice ls with t (or guide)
 
 ##/w/# window system
 		
-/usr/jkl/img/foo w/something/w see
- :init: /fiqh/img/t /usr/jkl/img/foo w/something/w : walk :0:see; quit
-/usr/jkl/img/foo w/something/w
- :init: /fiqh/img/t /usr/jkl/img/foo w/something/w : walk quit
+[ old and deleted ]
 
 calling a file with just '#!/!' clones it
 calling '/! <path>' consults 'absent', clones <path>, creating if it doesn't exist
@@ -69,32 +66,12 @@ fish shell understands calling a directory as calling its 't' (or wire).
 
 ## t t ! ( ! ... ! ) #
 
-/!( /00/00/00/00/00000000/00000000/t 
-    /00/00/00/00/00000000/00000000/t 
-    /00/00/00/00/00000000/00000000/! 
-  ( /00/00/00/00/00000000/00000000/00000000 (foo bar blorp) ))
+/!( /00/00/00/00000000/00000000/t 
+    /00/00/00/00000000/00000000/t 
+    /00/00/00/00000000/00000000/! 
+  ( /00/00/00/00000000/00000000/00000000 (foo bar blorp) ))
 
 ##/y/# 
 
-aggregated from a list of locations.
-y/<path>/ goes to the first occuring location that has it.
-  if the tree y/<path>/ already exists then
-    if leftl and thisl are identical then do nothing to y/<path>/
-    otherwise y/<path>/l/<thisl>/ is <path> as extant on thisl.
-tree sync across locations using y/<path>/l
-trees that work similarly
-
-i
-	i/jkl/l/tet 
-		-> /l/tet/i/jkl
-	i/tet/jkl 
-		-> i/jkl/l/tet/join * l/tet/i/jkl/join = directs how 
-l
-	for each l/net/ with l/host/
-		l/net/host/ = l/net/l/host/join * l/host/l/net/join
-	for each i/user/ where l/host/i/user
-		i/host/user = i/user/l/host = l/host/i/user
-		i/user/ = i/join * i/user/l/join * i/user/l/host/join * l/host/i/user/join * l/host/i/join * l/host/l/join
-
-join i l jkl dagesh
+[ old and deleted ]
 
