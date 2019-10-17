@@ -1,0 +1,5 @@
+#!/x/rc -l
+syshost=Linux
+objtype=386
+if (~ $#a 0) a=/0/
+exec '/b/'^$objtype^'/'^$syshost^'/b/fog/:' $*

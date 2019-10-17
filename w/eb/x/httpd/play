@@ -1,0 +1,70 @@
+#!/dis/sh.dis
+
+load std
+
+fn markdown {os markdown -b '/x/play/'^$1^'/'}
+
+bind '#U*/l/arch' /l/arch
+
+fn openpage { echo '
+<html>
+<head>
+<title>/x/play' $uri '</title>
+<meta name="viewport" content="width=device-width, user-scalable=no"/>
+<style type=text/css>
+body { 
+	background: black; 
+	color: #a0a0a0; 
+	margin: 0 0 0 0; 
+}
+h1,h2,h3,h4,h5 {
+	margin: 0 0 0 0; 
+	background: #141414; 
+	color: #494949;
+	font-family: sans-serif;
+}
+li { font-size: xx-large; }
+A:link { color: #a4a0ac; }
+A:visited { color: #a1a0a3; }
+
+p { 
+	margin-left: 8pt; 
+	margin-right: 8pt; 
+}
+</style>
+</head>
+
+<body>
+'
+}
+
+fn closepage { echo '</body></html>' }
+
+fn listfiles {
+	files=`{ls $uri | grep flac} 
+	echo '<h1>files</h1>'
+	for file in $files { 
+		echo '<a href="'^$file^'">' `{basename $file} '</a>' 
+	}
+}
+
+if {~ $uri '/stop'} { os killall sox; exit '' }
+
+if {test -d $uri} {
+	openpage
+	if {test -f $uri/guide} {
+		cat $uri/guide | markdown $uri
+	} {echo '<h1>' $uri '</h1>'}
+	listfiles
+	closepage
+ } {test -f $uri} {
+	duri=`{basename -d $uri}
+	if {no $start} {start = 0}
+	if {no $gain} {gain = 0}
+	{ echo -n $uri 'play ' }
+	{ if { os sox $uri -d gain $gain trim $start $duration >[2] /play.oops 
+		}{ echo ok 
+		}{ echo oops ; cat /play.oops 
+		}
+	} &
+ } { echo 'oops absent ' $uri }

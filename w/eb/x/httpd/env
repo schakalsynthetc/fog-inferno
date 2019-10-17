@@ -1,0 +1,14 @@
+#!/dis/sh.dis
+
+load std
+
+echo '<div class="x env">
+<table>'
+
+env | getlines {
+	echo '<tr><td>' $line '</td></tr>'
+}
+
+echo '</table>
+</div>
+'

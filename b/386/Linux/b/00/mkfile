@@ -1,0 +1,11 @@
+SYSHOST=Linux
+OBJTYPE=386
+ROOT=/l/sd/b/2
+B=$ROOT/b/$OBJTYPE/$SYSHOST
+ZERO=$B/b/00/00
+XC=9c
+XB=9l
+
+install:V: $ZERO/00.c
+	$XC $ZERO/00.c && $XB -o $ZERO/00 $ZERO/00.o && rm $ZERO/00.o
+

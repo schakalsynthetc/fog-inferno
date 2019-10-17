@@ -1,0 +1,2 @@
+#!/dis/sh.dis
+it=$1; y=$2; w=$3; m4 -D'IT='$it /tmp/Xt /w/eb/e/leaf/xt > /tmp/w

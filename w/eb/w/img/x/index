@@ -1,0 +1,29 @@
+#!/x/00/00/00
+#
+#
+#
+
+{Y=$1; ~ $#* 0 && Y=`{pwd}};
+
+cat <<!
+<html>
+<head> <title> $Y </title>
+<style type="text/css">
+!
+cat /w/eb/w/img/f
+
+cat <<!
+</style>
+</head>
+<body bgcolor="black" text="#999" link="#aac" vlink="#aaa">
+<table>
+!
+
+{ for (it in $Y/????????/????????/????????) { /w/eb/w/img/x/item $it } };
+
+cat <<!
+</table>
+</body>
+</html>
+!
+

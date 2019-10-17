@@ -1,0 +1,5 @@
+#!/x/fish/x/!
+{~ $#objtype || objtype=`{/x/fish/ask/objtype}};
+{~ $#syshost || syshost=`{/x/fish/ask/syshost}};
+
+printf '%s/%s' $objtype $syshost

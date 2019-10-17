@@ -1,0 +1,9 @@
+#!/! /b/386/Linux/guide
+
+## boot #
+
+m/.../m initrd image
+m/.../y mount point for initrd
+
+b/.../b the kernel
+

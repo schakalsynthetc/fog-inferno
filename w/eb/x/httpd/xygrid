@@ -1,0 +1,15 @@
+#!/dis/sh.dis
+
+load std
+
+{ echo '<table class="xy" id="/0/0/"> '
+	for x in (1 2 3 4 5 6 7 8 9 A B C D E F) {
+		echo -n '<tr class="xy" id="/'^$x^'/0/"> '
+	for y in (1 2 3 4 5 6 7 8 9 A B C D E F) {
+		echo -n '<td class="xy" id="/'^$x^'/'^$y^'/"> '
+		echo '/'^$x^'/'^$y^'/'
+		echo -n '</td> '
+	}; echo -n ' </tr> '}
+	echo; echo '</table>'; 
+}
+

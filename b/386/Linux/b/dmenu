@@ -1,0 +1,5 @@
+#!/x/rc -l
+#
+#
+#
+dmenuopts=(-nb black -nf '#747478' -sb '#303030' -sf '#747498' -fn '*helvetica*medium*r*normal*14*') exec dmenu $dmenuopts -p 'riot '

@@ -1,0 +1,11 @@
+( xt's )
+
+variable /t/
+variable /p/ 
+variable /q/
+variable /r/
+
+here dup 1024 allot /p/ !
+here dup 1024 allot /q/ !
+here dup 1024 allot /r/ !
+

@@ -1,0 +1,27 @@
+#!/dis/sh.dis
+
+if {no $p} {p=p/00/00/00};
+if {no $t} {t=oops} {t=$1;shift;};
+
+echo '<div class=oops id="/oops/'^$p^'/'^$t^'">'
+echo '<h1>oops</h1>';
+echo '<table class=oops>';
+
+echo '<tr id=/oops/argv>';
+{for (it in $*) {echo '<td class=arg>' $it '</td>'}};
+echo '</tr>';
+
+echo '<tr id=/oops/err>';
+{echo '<td class=err><pre class=err>'; cat /w/eb/x/fiqh/oops/p;  '</pre></td>'};
+echo '</tr>';
+
+echo '<tr id=/oops/env>';
+echo '<td><pre>'; env; echo '</td>';
+echo '</tr>';
+
+echo '<tr id=/oops/ns>';
+echo '<td><pre>'; ns; echo '</td>';
+echo '</tr>';
+
+echo '</table>'
+echo '</div>'

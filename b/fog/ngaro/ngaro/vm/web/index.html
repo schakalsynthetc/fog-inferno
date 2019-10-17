@@ -1,0 +1,62 @@
+<html>
+<head>
+<title>Retro Language</title>
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+<link rel="stylesheet" href="dark.css">
+</head>
+
+<body onload="init_fb()">
+<div id="wrap">
+<div id="main">
+<table border=0>
+<tr>
+<td width="600" height="300">
+  <div class="output" id="output"></div>
+</td>
+</tr>
+<tr>
+<td width="600">
+  <div id="fbcanvas"><canvas name="framebuffer" id="framebuffer" class="canvas" width="590" height="290"></canvas></div>
+</td>
+</tr>
+</table>
+<table>
+<tr>
+<td width="600">
+  <div id="ref"><iframe src="http://rx-core.org/docs/Core_Functions.html" frameborder="0" border="0" width="600" height="200"></iframe></div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div id="footer">
+  <div id="navcontainer" style="float:left">
+    <ul id="navlist">
+      <li><a href="javascript:pristine()">new</a></li>
+      <li><a href="javascript:saveImage()" id="current">save</a></li>
+      <li><a href="javascript:getImage()">load</a></li>
+      <li><input type="textarea" onBlur="javascript:this.value='';"></input></li>
+    </ul>
+  </div>
+  <div id="navcontainer" style="float:right">
+    <ul id="navlist">
+      <li><a href="javascript:toggleCanvas()">canvas</a></li>
+      <li><a href="javascript:toggleDocs()">quickref</a></li>
+  </div>
+</div>
+<script src="ngaro.js"></script>
+<script src="canvas.js"></script>
+<script src="retroImage.js"></script>
+<script src="browserDetect.js"></script>
+<script>
+  initVM();
+  loadImage();
+  startVM();
+
+  if (BrowserDetect.browser == "Firefox" && BrowserDetect.OS == "Windows")
+    TERM_WIDTH = 70;
+  if (BrowserDetect.browser == "Firefox" && BrowserDetect.OS == "Linux")
+    TERM_WIDTH = 70;
+</script>
+</body>
+</html>

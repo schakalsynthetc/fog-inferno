@@ -1,0 +1,6 @@
+This directory contains some incredibly hairy stuff fetched from Oleg's kingdom at: http://okmij.org/ftp/Scheme/
+
+Most files have been slightly rewritten in order to fit ULisp, so if you are interested in this you should directly go to Oleg's place.
+
+
+Stef

@@ -1,0 +1,2 @@
+#!/x/rc
+ROOT=/32; B=b/386/Linux/b; exec $ROOT/$B/emu -r $ROOT /x/init/x/init $*

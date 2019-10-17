@@ -1,0 +1,9 @@
+#!/x/rc
+
+{~ $#* 0 && {~ $#Q 0 || { exec printf 'Q /%0.2X/%0.2X/%0.2X/%0.8X/%0.8X/%0.8X/ ' $Q } }}
+
+y=`{pwd}; it=$1; {
+	test -d $y/$it && test -f $y/$it/t && {
+		cat $y/$it/$t; ls $y/$it;
+	} 
+}

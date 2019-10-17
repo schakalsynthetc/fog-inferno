@@ -1,0 +1,46 @@
+syntax "retro" "\.rx"
+color white "^.+$"
+
+# primitives
+color cyan          "dup |drop |swap |push |pop |1\+ |1\- |and |or |xor "
+color cyan          "\+ |\- |\* |\/mod |out |wait |in |\<\< |\>\> "
+
+# variables
+color yellow        "base|last|heap|which|compiler"
+
+# primtives (cont'd)
+color cyan          " @ | ! "
+
+# immediate
+color green         "^ *` [^ ]*"
+
+# conditionals and flow control
+color green         ";|;;|if|when|ifTrue|ifFalse|if;"
+color green         "repeat|again|for|fori|nexti|next|0;"
+
+# compiler
+color red           "^ *: [^ ]*"
+color red           " \[ "
+color red           " \[\[ "
+color red           " \] "
+color red           " \]\] "
+color brightred     "bi|tri|dip|sip|times|iter|\iterd|take|tack|curry"
+color red           " is |immediate|compile-only|reclass|reclass:"
+color red           "\.word|\.macro|\.compiler|\.primitive|\.data|with-class"
+color red           "last|d-\>xt|d-\>class|d-\>name|xt-\>d"
+
+# prefixex
+color yellow        start=" @" end=" "
+color yellow        start=" !" end=" "
+color yellow        start=" &" end=" "
+
+# Strings
+color magenta       "L?\"(\\"|[^"])*\""
+color magenta       "L?\.\"(\\"|[^"])*\""
+
+# Comments
+color white,blue     start="\([[:space:]]" end="\)"
+
+color brightgreen   "\{|\}|---reveal---"
+color ,green "[[:space:]]+$"
+color ,blue   "	"

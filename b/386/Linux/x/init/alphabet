@@ -1,0 +1,24 @@
+#!/bin/sh
+
+cat > t <<!
+#!/0/0/0!
+#!/0/0/0!
+#!/0/0/0!
+#!/0/0/0!
+0
+	l disk boot/ l/tet /l/acer syshost:Linux; obtype:386;
+!
+
+printf '         alphabet: ' >> /t
+
+for it in a b c d e f g h i j k l m n o p q r s u v w x y z; 
+do 
+	mkdir -p /$it
+	printf '%s ' $it >> /t
+done
+printf '; \n' >> /t
+
+for it in n
+do
+	/b/386/Linux/x/init/$it >> /t
+done

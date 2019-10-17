@@ -1,0 +1,95 @@
+
+read < /dev/null > emptyblk
+ls -lq emptyblk 
+
+cat emptyblk emptyblk emptyblk emptyblk emptyblk > five-empty-blocks
+
+fish vectors
+
+< input (vector arg .. arg) > output
+
+field of line of input -> arg
+
+output is input passed straight through
+x is a transform for each arg
+
+each x is argv of fixed length
+connect in pipelines for varying arg vector length
+run this in a leaf with file for each arg
+
+maybe some nice compositionality like
+	{{vector verb flags} arg..arg }
+might require "vector" to be shell builtin
+
+or
+	((verb modifier vector) arg..arg)
+
+# wav and such ##
+
+< input (vector t .. t)
+
+each t is a channel and unit type
+
+like "float32 channel of wav file"
+
+that directs both init (or quit) and unit interpretation
+
+init writes file and wav header
+walk/eval reads string to float
+quit closes it up
+
+leaf of numbered channel files mapping to argv
+arg string names a filter
+
+channel files are indexed and keyed by 'q' and 'r' files
+
+parameters are
+- structure delimiters (Us,Gs,Rs,Fs)
+- q indexer module
+- r mapper module
+- init and quit functions
+- max q
+- io chart and timing clocks
+
+vectored inputs to stdout can be nonblocking and out-of-order
+
+(unordered inputs) | (ordered outputs)
+
+this could map to jack/client/port and such
+
+jack and such would serve the files of a leaf
+for fish vector to work on
+
+signal flow graph walking up a fix tree
+	unordered inputs ordered and collected
+	sent as vector to parent directory
+	where they're written out to channel files
+	
+thus leaf where dir means inputs (many) and file means output (one)
+
+dir : right ; file : left ;
+
+flow is bidirectional
+	x : dir inputs, file outputs ;
+	y : file inputs, dir outputs ;
+
+x/0..n dirs oread
+y/0..n dirs owrite
+z = 0..n files ordwr
+
+mov channels
+	/figure/grp/bone/ trans,rot,scale / p,x,y,z 
+	/figure/grp/bone/audio/ t,mono,left,right
+	/figure/grp/bone/ctlprop : function to bone events ;
+	/figure/grp/ctlprop : function to bone ctl events ;
+	/figure/ctlprop : function to bone ctl events ;
+
+	/grp/figure/ctlprop : multi-actor ctl events ;
+	/grp/ctlprop : multi-actor ctl events ;
+
+ctl rate allows setting vector of bone values atomically in a grain
+
+ctl can take scalar values or E3 opcodes
+
+store numbered register or ftable for such as poses
+then assume pose by sending 'table index' opcode

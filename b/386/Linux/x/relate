@@ -1,0 +1,15 @@
+#!/x/rc
+
+rtree=/alphabet/relations
+
+# relate [left] [relation] [right]
+
+left=$1; shift; 
+relation=$1; shift;
+right=$*
+
+# right is a list, left is mapped to each element of the list.
+
+# if right is empty then the relation is intransitive.
+
+for (e in $right) { echo /x/relation/$relation $left $e }

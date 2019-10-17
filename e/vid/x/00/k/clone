@@ -1,0 +1,9 @@
+#!/x/rc
+#
+#
+#
+hours=$1; minutes=$2; seconds=$3;
+
+for (kh in `{seq 0 $hours}) for (km in `{seq 0 $minutes}) for (ks in `{seq 0 $seconds}) {
+	it=`{printf 'k/%0.2d/%0.2d/%0.2d' $kh $km $ks}; mkdir -p $it; printf '#!/! %s/%s\n' `{pwd} $it > $it/t; chmod 777 $it/t;
+}

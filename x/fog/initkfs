@@ -1,0 +1,5 @@
+mount -c {disk/kfs -r '#U*/i/jkl/fog/m/kfs/root'} /n/local
+mkdir -p /n/local/adm
+cp /a/Inferno/init.users /n/local/adm/users
+; disk/mkfs -a -u /n/local/adm/users /lib/proto/root > /m/kfs.arch/root
+disk/mkext -u -d /n/local < /m/kfs.arch/root

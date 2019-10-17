@@ -1,0 +1,10 @@
+#!/x/00/00/00
+#
+#
+#
+it=$1; shift; t=`{cat $it/t}; ftype=$t(5);
+ 
+printf '<tr id="%s" class="w img"><td class="w img preview %s"><img src="%s/%s" width="300">' $it $ftype $it 0.$ftype  
+printf '<td id="%s/x" class="fish" valign="top"><h3>%s/</h3><pre class="fish" contentEditable="true">annotate or fish here.\n</pre></td>' $it $it;
+printf '</tr>\n' 
+

@@ -1,0 +1,1 @@
+'From Squeak5.0 of 6 August 2015 [latest update: #15113] on 21 April 2019 at 3:33 pm'!Object subclass: #IoZ	instanceVariableNames: 't it left right u p q r stream direction x y z'	classVariableNames: ''	poolDictionaries: ''	category: 'fish'!

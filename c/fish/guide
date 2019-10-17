@@ -1,0 +1,38 @@
+cp /appl/cmd/^(
+	tokenize.b
+	timestamp.b
+	xd.b
+	plumb.b plumber.b
+	ls.b
+	styxchat.b ns.b nsbuild.b
+	env.b
+	read.b
+	os.b
+	sha1sum.b
+	ftest.b
+	bytes.b
+	cd.b
+	cat.b
+	getline.b
+	memfs.b
+	mntgen.b
+	pipefile.b
+	pipefs.b
+) .
+
+reader : read line, word, rune ; prompt
+mkdir fiqh
+cp /appl/cmd/acmeevent.b /appl/acme/acme/bin/^(win.b winm.b cd.b awd.b Navigator.b) fiqh
+
+touch fith-limbo-d
+
+cp (
+/appl/cmd/look.b
+/appl/cmd/sort.b
+/appl/cmd/uniq.b
+/appl/cmd/comm.b
+/appl/cmd/cmp.b
+/appl/cmd/diff.b
+/appl/cmd/m4.b
+/appl/cmd/unicode.b
+) .

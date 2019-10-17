@@ -1,0 +1,12 @@
+ROOT=   
+OBJTYPE=dis
+SYSHOST=Inferno
+B=$ROOT/b/$OBJTYPE/$SYSHOST/b
+ZERO=00/00/00
+
+$B/$ZERO.dis: 
+	limbo $B/$ZERO.b
+
+install:V: $B/$ZERO.dis
+	echo '#!'/b/$OBJTYPE/$SYSHOST/b/$ZERO.dis > /b/00/00/00; chmod 777 /b/00/00/00;
+

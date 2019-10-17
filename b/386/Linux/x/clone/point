@@ -1,0 +1,21 @@
+#!/x/rc -l
+
+{~ $#1 0 && {left=`{pwd}; it=0;} || {
+	left=`{basename -d $1}
+	it=`{basename $1}
+}}
+
+{~ $#2 0 && q0=8192 || { q0=$2 }}
+{~ $#3 0 && q1=8 || { q1=$3 }}
+
+X=echo
+
+x=(x) v=(clone point q: $q0^'*'^$q1 ';' y: $left/$it ';' ) $X $x $v
+
+{{test -d $left} || { 
+	{test -e $left} && {
+		echo oops extant point $left && exit oops # or convert to leaf
+	} || echo mkdir -p $left
+}}
+
+x=(dd) v=(-if /dev/zero -of $left/$it -bs $q0 -count $q1) $X $x $v

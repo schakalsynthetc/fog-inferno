@@ -1,0 +1,281 @@
+;;; $Name: rel-2_10 $
+;;; $Revision: 1.23 $
+;;; $Date: 2006/07/08 13:07:48 $
+;;;
+;;; (load "/Lisp/cm/src/cm.scm")
+
+
+;; misc
+
+(require 'srfi) ; cond-expand ... does not work !
+
+(defmacro cond-expand clauses
+  (letrec ((errout
+	    (lambda (form exp)
+	      (slib:error 'cond-expand 'invalid form ': exp)))
+	   (feature?
+	    (lambda (exp)
+	      (cond ((symbol? exp)
+		     (or (provided? exp) (eq? exp (software-type))))
+		    ((and (pair? exp) (list? exp))
+		     (case (car exp)
+		       ((not) (not (feature? (cadr exp))))
+		       ((or) (if (null? (cdr exp)) #f
+				 (or (feature? (cadr exp))
+				     (feature? (cons 'or (cddr exp))))))
+		       ((and) (if (null? (cdr exp)) #t
+				  (and (feature? (cadr exp))
+				       (feature? (cons 'and (cddr exp))))))
+		       (else (errout 'expression exp)))))))
+	   (expand
+	    (lambda (clauses)
+	      (cond ((null? clauses) (slib:error 'Unfulfilled 'cond-expand))
+		    ((not (pair? (car clauses))) (errout 'clause (car clauses)))
+		    ((or (eq? 'else (caar clauses)) (feature? (caar clauses)))
+		     `(begin ,@(cdar clauses)))
+		    (else (expand (cdr clauses)))))))
+    (expand clauses)))
+
+(require 'random)
+(require 'dynamic-wind)
+(require 'logical)
+(require 'format)
+
+(define (read-macro-set! char func)
+  #f)
+
+(define (os-name) (send (send SmalltalkImage current) platformName))
+
+(require 'pretty-print)
+
+(define pprint pretty-print)
+
+(define (list-set! lis pos val)
+  (set-car! (list-tail lis pos) val)
+  val)
+
+;; specialize vector-set! so that it can work on lists
+;; (else loop withh fail somewhere in scales.scm... ??)
+(define-generic vector-set!)
+(define-method vector-set! ((lis <pair>) index val)
+               (list-set! lis index val))
+
+
+;;; Keywords.
+
+(define (keyword->symbol kw)
+  (send (send kw allButFirst) asSymbol))
+
+(define (string->keyword str)
+  (send (string-append ":" str) asSymbol))
+
+(define symbol->keyword string->keyword)
+
+(define (keyword->string kw)
+  (send kw allButFirst))
+
+(define (keyword? ob)
+  (and (symbol? ob) (eq? (elt ob 0) #\:)))
+
+
+;; hash tables
+
+;(require 'hash-table)
+
+;(define (make-equal?-hash-table size)
+;  (make-hash-table size))
+
+;(define hash-ref (hash-inquirer equal?))
+
+;(define hash-set! (hash-associator equal?))
+
+;(define hash-remove! (hash-remover equal?))
+
+; ??:
+;(define (hash-fold fn x table)
+;  (hash-table-fold table fn x))    
+
+(define (make-equal?-hash-table size)
+  (send Dictionary new))
+
+(define (hash-ref table key)
+  (send table at: key))
+
+(define (hash-set! table key value)
+  (send table at:put: key value))
+
+(define (hash-remove! table key)
+  (send table removeKey: key))
+
+(define (make-equal?-hash-table size)
+  (send Dictionary new))
+
+(define (hash-ref table key)
+  (send table at: key))
+
+(define (hash-set! table key value)
+  (send table at:put: key value))
+
+(define (hash-remove! table key)
+  (send table removeKey: key))
+
+(define (hash-fold fn init table)
+  (dolist (association (vector->list (send table associations)) init)
+    (set! init (fn (send association key) (send association value) init))))
+  
+
+
+;;; Object system (copied from stklos.scm)
+
+;(load "lkos") ; port of the STKLOS object system to ULisp/Squeak 
+
+
+
+(define-macro (define-generic* . args)
+  `(define-generic ,(car args)))
+
+(define-macro (define-method* formals . body)
+  `(define-method ,(car formals) ,(cdr formals) ,@body))
+
+(define-macro (define-class* class supers slots . options)
+  (let ((cname #f)
+        (metac #f)
+        (csets (list)))
+    ;; substitute :init-form for :init-value
+    (do ((tail slots (cdr tail))
+         (head (list )))
+        ((null? tail) 
+         (set! slots (reverse! head)))
+      (set! head 
+            (cons (if (member ':init-value (cdr (car tail)))
+                      (map (lambda (x) (if (eq? x ':init-value)
+                                           ':init-form x))
+                          (car tail))
+                      (car tail))
+                  head)))
+    (do ((tail options (cddr tail)))
+        ((null? tail) #f)
+      ;; parse the various metaclass options we use (in guile these
+      ;; appear in prop list format after slotdefs)
+      (case (car tail)
+        ((:name) (set! cname (cadr tail)))
+        ((:metaclass) (set! metac (cadr tail)))
+        ((:file-types )  ; cm metaclass slot
+         (set! csets (list* `(slot-set! ,class 'handles
+                                        ,(cadr tail)) csets)))
+        ((:output-hook) ; cm metaclass slot
+         (set! csets (list* `(slot-set! ,class 'output-hook
+                                        ,(cadr tail)) csets)))
+        ((:definer) ; cm metaclass slot
+         (set! csets (list* `(slot-set! ,class 'definer
+                                        ,(cadr tail)) csets)))
+        ((:versions) ; cm metaclass slot
+         (set! csets (list* `(slot-set! ,class 'versions
+                                        ,(cadr tail)) csets)))
+        ))
+    `(begin
+      (define-class ,class ,supers ,slots
+                    ,@ (if metac (list :metaclass metac) (list)))
+      (slot-set! ,class 'name ,cname)
+      ;; set slots from metaclass
+      ,@csets)))
+
+(define-macro (find-class* name . args)
+  `(find-class (string->symbol (string-append "<" ,name ">"))))
+
+(define-macro (define-object-printer* args . body)
+  `(define-method write-object , args ,@ body))
+
+;; has class-subclasses
+
+(define (slot-definition-initargs slot)
+  (do ((opts (slot-definition-options slot) (cddr opts))
+       (args (list)))
+      ((null? opts)
+       (reverse! args))
+    (if (eq? (car opts) ':init-keyword)
+      (set! args (cons (cadr opts) args)))))
+
+(define class-direct-superclasses class-direct-supers)
+
+(define slot-definition-initform slot-definition-init-form)
+
+(define (slot-getter-form obj slot)
+  `(slot-ref ,obj ',slot))
+
+(define (slot-setter-form obj slot val)
+  `(slot-set! ,obj ',slot ,val))
+
+; (define-class <foo> () ((a :accessor foo-a :init-keyword :a :init-keyword :z)))
+; (describe (make <foo> :z 22))
+; (describe (make <foo> :z 22))   ; allows multi keywords but others do not set
+; (slot-ref <foo> 'name)
+; (slot-set! <foo> 'name 'freddy)  ; can change class name
+; (find-class 'freddy)
+; (describe <foo>)
+
+
+
+;                                   Chicken Gauche  Guile  Stklos
+;(make class . args)                        y       y       y
+;(initialize class inits)                   y       y       y
+;(class-of obj)                             y       y       y
+;(is-a? obj class)                          y       y       y
+;(slot-ref obj slot)                        y       y       y
+;(slot-set obj slot val)                    y       y       y
+;(class-name class)                         y       y       y
+;(class-slots class)                        y       y       x
+;(class-direct-subclasses class)            y       y       y
+;(class-direct-superclasses class)          *       y       *
+;(slot-definition-name slot)                y       y       y
+;(slot-definition-initargs slot)            n       n       n
+;(slot-definition-initform slot)            n       n       n
+
+; SCHEMES MUST PROVIDE THESE OOP METHODS, starred methods are to
+; avoid overriding an existing implementation and/or normalize syntax
+; issues between schemes
+;
+;;(define-class* ...)
+;;(define-method* ...)
+;;(define-generic* ...)
+;(find-class* name)                
+;;(define-object-printer* object port)
+;(class-subclasses class) 
+;;(slot-getter-form obj slot)
+;;(slot-setter-form obj slot val)
+
+
+;; loading Common Music
+
+(define *cm-directory* #f)
+
+(let ((this-file #f)
+      (load-path "src/")
+      (file-list '("loop" "level1" 
+                   "utils" "mop" "objects"
+		   "data" "scales" "spectral" "patterns"
+                   "io" "scheduler" "sco" "clm" "clm2"
+                   "midi1" "midi2" "midi3"
+		   "osc" "sc" "pm" "rt"
+                   )))
+
+
+  (let load-cm ((tail file-list))
+       (if (null? tail) 
+           #f
+           (let ((file (string-append load-path (car tail))))
+             (display (string-append "; loading " file))
+             (newline)
+             (load file)
+             (load-cm (cdr tail)))))
+
+  ;; load user init file if it exists
+ ; (let* ((this (pwd))
+ ;        (home (cd))
+ ;        (init (string-append home "/.cminit.lisp")))
+ ;   (if (file-exists? init)
+ ;       (load init))
+ ;   (cd this))
+
+  )                                     ; end let
+

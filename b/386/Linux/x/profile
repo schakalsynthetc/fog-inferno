@@ -1,0 +1,10 @@
+PLAN9=/usr/local/plan9
+path=(/x/00/00 /x/00 /x $PLAN9/bin $path)
+
+if (~ $#font 0) font=/w/font/vera/sans/14/font
+
+l = samekh
+i = $USER
+p = $pid
+
+. /x/functions

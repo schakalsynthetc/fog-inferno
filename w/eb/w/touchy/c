@@ -1,0 +1,28 @@
+// /w/eb/w/touchy/c
+
+var it = document.getElementById("touchimg");
+var what = document.getElementById("what");
+
+var showevt = function () {
+		what.innerHTML="/e/vt/" + arguments[0]["type"] + "\n"; 
+		for (i in arguments) { 
+			what.innerHTML += ":" +i+ ": " + arguments[i] + " ;\n" ; 
+			for (ii in arguments[i]) { what.innerHTML += ":" +i+ ": " +ii+ ": " + arguments[i][ii] + " ;\n"; }
+		} 
+}
+
+function init () {
+	what.innerHTML = "init\n"
+	               + " : it   : " + it + ";\n";
+	               + " : what : " + what + ";\n";
+	it.blur = showevt ;
+	it.focus = showevt ;
+	it.onclick = showevt ;
+	it.onmousedown = showevt ;
+	it.onmousemove = showevt ;
+	it.onmouseup = showevt ;
+}
+
+init();
+
+// end //

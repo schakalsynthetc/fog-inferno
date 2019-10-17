@@ -1,0 +1,100 @@
+# todo
+
+## fish shell for inferno
+
+## fiqh squeak/morphic and web/httpd
+
+needs wires for the squeak version
+
+android webview app for the fiqh world
+
+think about unifying the wire protocol over squeak/httpd
+
+login and permissions for http wire (should be consistent with squeak wire)
+
+fiqh web ui for fix tree navigator and text file editing, acme backcompatible
+
+fiqh leaf context is the wdir, the open file in it, the fish process context
+
+fiqh/fix/fish working directory is object is fith image
+
+web ui can keep this whole context client-side, think about javascript proxying (Qt,Qr)
+
+assign Qids to DOM elements on the page
+
+DOM document is wdir/obj/image
+document lifetimes correspond to fish shell process lifetimes
+ 
+# t ## unit vector map verb form point leaf tree alphabet verb wire
+
+((x /live/ y) (leaf session track clip take))
+
+## fith wire #
+	/b/dis/Inferno/c/wire.b
+first five arguments
+
+a file with '#!/!' called with no arguments walks to itself
+a file /path/  '#!/left/!' -> '#!/!' walks to left and evals left on itself
+a file '#!/! left' does the same
+
+if <path> is '#!/! <path>' then commutative self-evaluating
+
+/path/thing <index> <verb> <argv>
+/usr/jkl/guide 192 fee foo
+
+## acme stuff #
+clean tags so that b2 on the whole tag can make sense
+tag is t, body is 0
+let dir windows form a nice ls with t (or guide)
+
+(actually, invoke <dir>/t to do it with a verb)
+	call of /dir/t /dir/t will do it (consulting 'w' for display form)
+		/usr/jkl/t w/acme/2
+
+##/w/# window system
+		
+/usr/jkl/img/foo w/something/w see
+ :init: /fiqh/img/t /usr/jkl/img/foo w/something/w : walk :0:see; quit
+/usr/jkl/img/foo w/something/w
+ :init: /fiqh/img/t /usr/jkl/img/foo w/something/w : walk quit
+
+calling a file with just '#!/!' clones it
+calling '/! <path>' consults 'absent', clones <path>, creating if it doesn't exist
+writing just '#!/!' to a file then exec'ing it is identically 'clone'
+we can see if files need to be cloned by checking if the whole contents is '#!/!'
+clone a whole leaf by '#!/!' then leaf on stdin
+the clone can be a file that becomes a leaf when exec'd?
+
+fish shell understands calling a directory as calling its 't' (or wire).
+
+## t t ! ( ! ... ! ) #
+
+/!( /00/00/00/00/00000000/00000000/t 
+    /00/00/00/00/00000000/00000000/t 
+    /00/00/00/00/00000000/00000000/! 
+  ( /00/00/00/00/00000000/00000000/00000000 (foo bar blorp) ))
+
+##/y/# 
+
+aggregated from a list of locations.
+y/<path>/ goes to the first occuring location that has it.
+  if the tree y/<path>/ already exists then
+    if leftl and thisl are identical then do nothing to y/<path>/
+    otherwise y/<path>/l/<thisl>/ is <path> as extant on thisl.
+tree sync across locations using y/<path>/l
+trees that work similarly
+
+i
+	i/jkl/l/tet 
+		-> /l/tet/i/jkl
+	i/tet/jkl 
+		-> i/jkl/l/tet/join * l/tet/i/jkl/join = directs how 
+l
+	for each l/net/ with l/host/
+		l/net/host/ = l/net/l/host/join * l/host/l/net/join
+	for each i/user/ where l/host/i/user
+		i/host/user = i/user/l/host = l/host/i/user
+		i/user/ = i/join * i/user/l/join * i/user/l/host/join * l/host/i/user/join * l/host/i/join * l/host/l/join
+
+join i l jkl dagesh
+

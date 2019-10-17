@@ -1,0 +1,14 @@
+# emu sh initialisation here
+
+load std
+
+syshost=Inferno
+objtype=dis
+
+l = `{cat /dev/sysnname} 
+i = `{cat /dev/user} 
+p = $pid
+
+b = $syshost/$objtype
+B = b/$syshost/$objtype
+

@@ -1,0 +1,23 @@
+#!/w/fith/limbo/! /00000000/00000000/00000000/
+
+{
+	here is the code block 
+	that we will preproc 
+	and compile 
+}
+
+[x arguments [ this is a call block ]]
+[{x arguments} [ this is a call block ]]
+
+[ x ('this is a call block' is a string argument) []]
+
+[ x arguments [ brackets a block of stdin ]]
+
+[ x arguments 
+	[ a block of stdin | and counterpart block of stdout ] (point walked)
+	[ another pair of stdin | and stdout blocks ] (point walked) [ quit block ]]
+	
+
+[ x arguments [ this one has a quit block ]]
+
+[ x 'this one does not have a quit block' is a string argument ]

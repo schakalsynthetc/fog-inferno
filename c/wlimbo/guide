@@ -1,0 +1,40 @@
+#!/! /w/fith/limbo/guide
+
+limbo window
+
+boilerplate init, quit
+
+it is preprocessed to it.b compiled to it.dis
+
+'x arg..arg' make and call it
+
+w file is code and trial run workspace
+call with 'w flags annotations'
+
+w is read for code block and run slots
+
+'clone name' to make a module
+
+anons are named by qid 'Xa(QID)'
+'clone' a new qid timestamped now
+
+/fith/limbo/ index / clone time / run time /t
+
+touch e/^(
+wire 
+imports signature global 
+init quit oops eval walk
+)
+
+in the boilerplate
+- walk is always stdin reader parser
+- eval acts on the walked input
+
+keep vector sequence number
+
+sugar for parsing walkers
+
+0 is what we do on arguments before reading stdin
+
+if only 0 is defined we don't walk
+

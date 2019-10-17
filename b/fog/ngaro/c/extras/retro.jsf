@@ -1,0 +1,52 @@
+# JOE syntax highlight file for Retro
+
+=Idle
+=Constant	bold yellow
+=Comment 	white bg_blue
+=String 	black dim bg_yellow
+=Text		bold black
+=Escape 	bold green
+=Paren		red
+=Quote		bold
+=Prim		bold green
+=Tag		bold blue
+=Depr    	bold yellow
+
+:idle Idle
+	*		idle
+	"\""		string		recolor=-1
+	"[]"		paren		recolor=-1
+	"("		comment		recolor=-1
+	"&0-9"		number		recolor=-1
+	"!=%*+/<>^|~a-zA-Z_\-"	ident	buffer
+
+:number Constant
+	*		number
+	" \n"		idle
+
+:comment Comment
+	*		comment
+	")"		idle
+
+:string String
+	*		string
+	"\""		idle
+
+:paren Paren
+	*		idle		noeat
+	
+:ident Idle
+	*		idle		noeat strings
+	"\!"	prim
+	"\@"	prim
+	"dup"	prim
+	"drop"	prim
+	"swap"	prim
+	"push"  prim
+	"pop"   prim
+done		
+	"\-\"a-zA-Z_0-9!#@$%^&*+={}|/\\:';,.<>/?~`" ident
+
+
+:prim Prim
+	*		idle		noeat

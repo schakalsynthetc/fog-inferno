@@ -1,0 +1,28 @@
+#!/dis/sh.dis
+
+load std
+
+q=()
+
+if {test -d $uri} { q=`{ls $uri} }
+
+echo '<table class="ls" id="'^$uri^'">'
+for it in $q {
+  echo '<tr valign=top id="'^$it^'">'
+  echo '  <td valign="top" class="r"><span class="filename">' `{basename $it} '</span></td>'
+  echo '  <td valign="top" class="q">'
+  if {test -f $it} {
+  	echo '<div class="file" contentEditable="true"><pre>'; 
+  	echo $it; 
+  	echo '</pre></div>'
+  } {test -d $it} {
+	echo '<div class="dir">'
+	for dirent in $it/* {
+		echo '  <a class="dirent" target="_blank" href="/x/tree/'^$dirent^'">' `{basename $dirent} '</a>'
+		}
+	echo '</div>'  
+  }
+  echo '</td>'
+  echo '</tr>'
+}
+echo '<table>'

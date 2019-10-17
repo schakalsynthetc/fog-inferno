@@ -1,0 +1,32 @@
+dis
+	+
+lib
+	+
+locale
+	+
+man
+	+
+mnt
+	acme
+	arch
+	factotum
+	keys
+	keysrv
+	registry
+	wiki
+	wm
+	wrap
+	wsys
+module
+	+
+n
+tmp
+usr
+	inferno
+		charon
+			*
+		keyring
+		lib
+			*
+		namespace
+		README

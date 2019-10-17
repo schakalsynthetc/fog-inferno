@@ -1,0 +1,24 @@
+
+<!-- 
+id="/w//F0/__WID__/t" class="fiqt terminal infix upper left t"
+id="/w/F1/__WID__/t" class="fiqt terminal infix upper right t"
+
+id="/w/F2/__WID__/t" class="fiqt terminal infix lower left t"
+id="/w/F3/__WID__/t" class="fiqt terminal infix lower right t"
+
+id="/w/F4/__WID__/t" class="fiqt terminal edge left t"
+id="/w/F5/__WID__/t" class="fiqt terminal edge right t"
+id="/w/F6/__WID__/t" class="fiqt terminal edge upper t"
+id="/w/F7/__WID__/t" class="fiqt terminal edge lower t"
+
+id="/w/F8/__WID__/t" class="fiqt terminal tail t"
+id="/w/F9/__WID__/t" class="fiqt terminal head t"
+
+
+<span id="/w/FA/__WID__/a" class="fiqt terminal a"></span>
+<span id="/w/FB/__WID__/b" class="fiqt terminal b"></span>
+<span id="/w/FC/__WID__/c" class="fiqt terminal c"></span>
+<span id="/w/FD/__WID__/d" class="fiqt terminal d"></span>
+<span id="/w/FE/__WID__/e" class="fiqt terminal e"></span>
+<span id="/w/FF/__WID__/f" class="fiqt terminal f"></span>
+-->

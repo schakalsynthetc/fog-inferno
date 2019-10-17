@@ -1,0 +1,9 @@
+#!/! /w/eb/guide
+
+https://github.com/BabylonJS/Babylon.js.git
+
+/x/shebang `{/x/clone dispatch} /limbo/httpd/dispatch/t
+
+/w/eb/y/
+
+fixme: httpd/Contents may segfault on broken suffix file? 

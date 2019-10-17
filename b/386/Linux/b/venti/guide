@@ -1,0 +1,17 @@
+#/x/venti
+
+## types
+
+Vhid { t object index [hash [h1 h2 h3 h4]] }
+
+p: object this block is a member of 
+q: this block's index in its object
+
+hash is five words (20 bytes) 
+
+(Qid [13] path,version,type) + rune + byte = Xt
+
+A 64 line pairs a Vhid to a Qid with room for one more Xt
+
+(ixlist: t, pointer, index, tail)
+

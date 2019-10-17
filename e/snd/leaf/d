@@ -1,0 +1,6 @@
+#!/! /snd/leaf/d
+
+## timecode #
+
+:00:00:00:0000:
+	: hour : minute : second : ms ;

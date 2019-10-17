@@ -1,0 +1,17 @@
+SYSHOST=Linux
+OBJTYPE=386
+ROOT=/l/sd/b/2
+B=$ROOT/b/$OBJTYPE/$SYSHOST
+ZERO=$B/b/00/00
+XC=9c
+XB=9l
+
+/%/:V:
+	mkdir -p /$stem
+
+zero:V: $ZERO/00.c
+	$XC $ZERO/00.c && $XB -o $ZERO/00 $ZERO/00.o && rm $ZERO/00.o
+
+install:V: /b/00/00/ zero
+	cp $ROOT/b/$OBJTYPE/$SYSHOST/b/00/00/00 /b/$OBJTYPE/$SYSHOST/b/00/00/00;
+	printf '#!/b/%s/%s/b/00/00/00\n' $OBJTYPE $SYSHOST >/b/00/00/00; chmod 777 /b/00/00/00;

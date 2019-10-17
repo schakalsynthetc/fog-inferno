@@ -1,0 +1,11 @@
+[Unit]
+Description=inferno
+
+[Service]
+Type=forking
+User=inferno
+ExecStart=/b/386/Linux/x/init/inferno
+
+[Install]
+WantedBy=multi-user.target
+

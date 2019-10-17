@@ -1,0 +1,8 @@
+#!/x/rc -l
+
+for (i in /h/vac/*) {
+	printf '%s/: %s ;\n' $i `{
+		cat $i/y || grep '^/y' $i/t || echo 0
+	}
+}
+

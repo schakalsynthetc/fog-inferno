@@ -1,0 +1,10 @@
+#!/! /w/eb/c/guide
+
+### /w/eb/c/httpd ## the server #
+
+m4 preprocessing in-server
+defines in sent http headers or search
+
+maybe some kind of inbuilt markdown
+
+venti block stuff

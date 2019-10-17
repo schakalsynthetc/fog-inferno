@@ -1,0 +1,11 @@
+#!/dis/sh.dis
+
+# <</log { echo ': init spawn httpd :' `{date} ':' }
+
+# bind -c '#UD:/fiqt/w/eb' /w/eb
+# bind -bc '#UD:/fiqt' /w/eb/y
+# bind -bc /w/eb/w /w/eb/y
+
+/w/eb/x/httpd/httpd.dis -D -a 'tcp!*!6670' &
+
+# <</log { echo ': quit spawn httpd :' `{date} ':' }

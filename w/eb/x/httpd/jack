@@ -1,0 +1,23 @@
+#!/dis/sh.dis
+
+load std
+
+if {~ $uri '/play'} { x=(play) } 
+if {~ $uri '/stop'} { x=(stop) }
+if {~ $uri '/reset'} { x=(reset) }
+if {~ $uri '/locate'} { x=(locate $q) }
+
+os /x/jack/transport $x
+
+echo '
+<html> <head> <title>/x/jack</title>
+<meta name="viewport" content="width=device-width"/>
+<link rel="stylesheet" href="/style.css"/> </head>
+<body>
+<a href="/x/jack/play"><h1>play</h1></a>
+<a href="/x/jack/stop"><h1>stop</h1></a>
+<img src="/img/shrine-fuzzy.png" align="right">
+<a href="/x/jack/reset"><h1>reset</h1></a>
+</body>
+</html>
+'

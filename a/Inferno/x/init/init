@@ -1,0 +1,46 @@
+#!/dis/sh.dis
+#
+#
+#
+load std; autoload=std; Y=$emuroot; X=$*; objtype=dis; syshost=Inferno; B=b/$objtype/$syshost/b;
+
+if {~ $#* 0}{ 
+	X=(); # for (x in /x/init/y/*) { X=($X `{basename $x}) }; 
+	echo -n '-- quit -- ' ;
+	fn quit { x=$1; 
+		if{ ftest -f /a/Inferno/x/quit/$x }{ run /a/Inferno/x/quit/$x }{ }
+	}; for (x in $X) { quit $x && echo -n $x ''}; echo '----'; fn quit; 
+
+; run /a/Inferno/x/quit/quit }{
+
+  { ramfile /t && > /t >[2=1] {echo '#!/! t '; 
+		echo ' :X:' $X ':Y:' $Y ';' ;echo; 
+  # environment ##
+  	home=/usr/jkl;
+  # host ## set up b, X ###
+	bind /$B/00/00/00 /b/00/00/00 
+	# memfs /b/00/00/00; mount -bc {mntgen} /b/00/00/00;
+	bind -a '#C' / ;
+
+	# mkdir -p /l/00/00/00 && bind / /l/00/00/00; 
+
+	#/b/## call to get host exec environment #
+	# (X Xt B Bt Bx)=`{os '/b/00/00/00' /b/dis/Inferno/t}; { os $B /b/dis/Inferno/t init $emuroot $emuwdir $"emuargs };
+	
+  } && chmod 755 /t }
+
+# go ########
+     # argv is the list of units to run, zero arguments is called last
+     # run the inferno init then the corresponding host init
+
+	echo -n '-- init -- '
+ fn init { x=$1;  
+	if{ ftest -f /a/Inferno/x/init/$x
+	}{ 
+		echo -n $x ''; run /a/Inferno/x/init/$x || echo -n /oops/$x '' 
+	}{
+		echo -n /oops/$x ''
+	}
+  }; for (x in $X) { init $x }; fn init; 
+
+; run /a/Inferno/x/init/init }

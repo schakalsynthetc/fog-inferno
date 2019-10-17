@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html> 
+<head> 
+<title>__URI__</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"/>
+<style type="text/css">
+body { background: #454545 url(bg.jpeg) ; color:#AAA; margin: 0 0 0 0 ; padding: 0 0 0 0 ; }
+A:link { background:#000; color:#AAE; text-decoration:none; }
+A:hover { background:#007; color:#CCF; }
+A:visited { color:#AAC; background:#000017; text-decoration:none; }
+h1,h2,h3,h4 { font-family: sans-serif ; font-style:bold; font-size:12pt; }
+table,tr,td,ul,ol,div,pre { padding:0; margin:0; }
+table.Xt { padding:0; margin:0; background:black; font-family:sans-serif; font-weight:bold; font-size:12pt; }
+[contenteditable="true"]:active,[contenteditable="true"]:focus { border:none; outline:none; }
+td.Xt { margin:0; padding: 8pt; background: #282828; color: #AAE; font-family: sans-serif; font-size:12pt; }
+.Xp { margin:0; color:#BBB; background:#000000; font-family: monospace; font-weight:bold; font-size:12pt; }
+.Xq { margin:0; background: #101034; color: #AAC; font-family: sans-serif; font-size:12pt; }
+.Xr { margin:0; background: #101010; color: #AAC; font-family: sans-serif; font-size:12pt; }
+.Xq li { list-style-type:none; padding-top: 4pt; }
+.Xr li { list-style-type:none; padding-top: 4pt; }
+</style>
+<script type="text/javascript">
+
+function init(it,y){
+	it.t={}; 
+	it.t.p=0; 
+	it.t.q=0; 
+	it.t.y=y; 
+	it.t.w=document.getElementById(y+"/00/00"); 
+	
+	it.t.l="blue"; it.t.i="jkl";
+
+	it.y=function(t){return t.y};
+	it.w=function(t){return t.w};
+	it.l=function(t){return t.y};
+	it.i=function(t){return t.w};
+	
+	return it;
+}
+
+</script> 
+</head>
+
+<body id="/w/00/00/00/00000000/00000000/00000000" class="Xt"> 
+<table id="__URI__" class="Xt" width="100%">  
+<thead id="__URI__/t" class="Xt">
+<tr id="__URI__/t/00" class="Xt"> 
+<td class="Xt" id="__URI__/t/00/00">t</td> 
+<td class="Xp" id="__URI__/t/00/01">__URI__</td>
+</tr>
+</thead>
+<tbody id="__URI__/00/00" class="Xt">
+<tr id="__URI__/00/00/q" class="Xt"> 
+<td id="__URI__/00/00/t" class="Xt">&nbsp;</td> 
+<td id="__URI__/00/00/p" class="Xp">
+<pre id="__URI__/00/00/00" class="textEdit" contentEditable="true"> 

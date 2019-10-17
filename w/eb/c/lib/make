@@ -1,0 +1,2 @@
+#!/dis/sh.dis
+bind -b /l/blue/w/eb/a/httpd /module; limbo $%;

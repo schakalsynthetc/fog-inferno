@@ -1,0 +1,19 @@
+#!/x/rc
+
+fn go {
+	if (test -d $x) { 
+		if (test -x $x/:) 
+			exec $x/: $* 
+		if (test -e $x/y) {
+			if (test -x $x/y) exec $x/y $* 
+			if (test -f $x/y) exec /x/fish/xplain $* 
+			if (test -d $x/y) exec /x/fish/xtree $*
+		}
+		if (test -e $x/n) {
+			if (test -x $x/n) exec $x/n $*
+			if (test -f $x/y) exec /x/fish/xplain $* 
+			if (test -d $x/y) exec /x/fish/xtree $*
+		}
+	}
+	if (test -x $x) { exec $x $* }
+}

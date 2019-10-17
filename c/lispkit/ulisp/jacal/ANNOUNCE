@@ -1,0 +1,74 @@
+This message announces the availability of JACAL release jacal-1c2.
+
+JACAL is an interactive symbolic mathematics program.  JACAL can
+manipulate and simplify equations, scalars, vectors, and matrices of
+single and multiple valued algebraic expressions containing numbers,
+variables, radicals, and algebraic differential, and holonomic
+functions.
+
+JACAL is written in Scheme and works with Scheme implementations which
+support the SLIB Scheme Library.  The SCM Scheme implementation
+(written in C) is available with JACAL.  SCM runs on Amiga, Atari-ST,
+MacOS, MS-DOS, OS/2, NOS/VE, Unicos, VMS, Windows, Unix and similar
+systems.
+
+JACAL is free software and part of the GNU project.  It is released
+under the GNU General Public License (GPL).
+
+Documentation and distributions in several formats are linked from
+JACAL's home page:
+
+	      <http://people.csail.mit.edu/jaffer/JACAL>
+
+Links to distributions of JACAL and related softwares are at the end
+of this message.
+
+			       -=-=-=-
+jacal-1c2 news:
+
+  * Supports GNU configure.
+  * Makefile: Reorganized per <http://www.gnu.org/prep/standards/>.
+  * English.scm (tps:2d): Put space between brackets and matrix
+    contents in order to differentiate between bunch and matrix.
+  * jacal.texi: Added documentation for missing commands.
+  * (Guile 1.8.6 and 1.8.7): Supported.
+
+  From Vytautas Jancauskas:
+  * Interpolation commands: interp.lagrange, interp.newton,
+    interp.neville, interp (Hermite).
+
+  From Sarah V. Jaffer:
+  * All built-in commands now check for correct number of arguments.
+
+Details at
+<http://cvs.savannah.gnu.org/viewvc/*checkout*/jacal/jacal/ChangeLog>
+
+			       -=-=-=-
+
+JACAL is available from:
+ <http://groups.csail.mit.edu/mac/ftpdir/scm/jacal-1c2.zip>
+Also available as RPM:
+ <http://groups.csail.mit.edu/mac/ftpdir/scm/jacal-1c2-1.src.rpm>
+ <http://groups.csail.mit.edu/mac/ftpdir/scm/jacal-1c2-1.noarch.rpm>
+
+SLIB is a portable scheme library which JACAL requires:
+ <http://groups.csail.mit.edu/mac/ftpdir/scm/slib-3b3.zip>
+Also available as RPM:
+ <http://groups.csail.mit.edu/mac/ftpdir/scm/slib-3b3-1.src.rpm>
+ <http://groups.csail.mit.edu/mac/ftpdir/scm/slib-3b3-1.noarch.rpm>
+Also available as MS-Windows installer:
+ <http://groups.csail.mit.edu/mac/ftpdir/scm/slib-3b3-1.exe>
+
+SCM is a small Scheme implementation under which JACAL will run.
+SCM source is available from:
+ <http://groups.csail.mit.edu/mac/ftpdir/scm/scm-5e7.zip>
+ <http://groups.csail.mit.edu/mac/ftpdir/scm/scm-5e7-1.src.rpm>
+Also available as binary RPMs:
+ <http://groups.csail.mit.edu/mac/ftpdir/scm/scm-5e7-1.i686.rpm>
+ <http://groups.csail.mit.edu/mac/ftpdir/scm/scm-5e7-1.x86_64.rpm>
+Also available as MS-Windows installer:
+ <http://groups.csail.mit.edu/mac/ftpdir/scm/scm-5e7-1.exe>
+
+Programs for printing and viewing TexInfo documentation (which JACAL
+has) come with GNU Emacs or can be obtained via ftp from:
+ <ftp://ftp.gnu.org/pub/gnu/texinfo>

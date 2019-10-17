@@ -1,0 +1,2 @@
+#!/x/rc
+awk '{printf("%8d ''%s''\n",NR,$0)}'

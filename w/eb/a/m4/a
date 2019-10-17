@@ -1,0 +1,12 @@
+define(`ROOT',`/w/eb')dnl
+define(`___Y',`include('ROOT`/y/'$1`/0)')dnl
+define(`___E',`include('ROOT`/e/'$1`/e)')dnl
+
+define(`___F',`include(`f')')
+
+define(`___TITLE',`hello world')dnl
+define(`TITLE',`define(`___TITLE',$1)')dnl
+
+define(`___STYLE',`00/00000000/00000000/00000000')dnl
+define(`STYLE',`define(`___STYLE',$1)')dnl
+

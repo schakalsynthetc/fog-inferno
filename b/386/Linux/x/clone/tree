@@ -1,0 +1,24 @@
+#!/x/rc -l
+
+{{! ~ $#1 0} && left=$1; shift || left=() }
+{{! ~ $#1 0} && right=$1; shift || right=() }
+
+fn zero { 
+	echo 'zero!' 
+}
+fn one { left=$1; right=$2;
+	echo one left: $left right: $right
+}
+fn left { left=$1; right=oops;
+	echo left left: $left right: $right
+}
+fn right { right=$1; left=oops;
+	echo right left: $left right: $right
+}
+
+{{ {! ~ $#left 0}
+	} && {{! ~ $#right 0} && one $left $right || left $left 
+	} || {{! ~ $#right 0} && right $right || zero 
+}}
+
+

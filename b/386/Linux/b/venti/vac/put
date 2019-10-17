@@ -1,0 +1,21 @@
+#!/x/rc -l
+
+y=`{cleanname -d `{pwd} $1}
+today=`{today}
+now=`{now}
+
+{ score=`{/x/vac/vac $y} } && {
+	hash = `{echo $score | sed 's/vac://'}
+	mkdir -p /h/vac/$hash/r
+	{
+		echo /t
+		echo /h/vac/$hash
+		cleanname /y/$y
+		echo /j/$today/$now 
+		echo /i/$i 
+		echo /l/$l 
+
+	} > /h/vac/$hash/t
+	echo $y > /h/vac/$hash/y
+	echo /h/vac/$hash
+}

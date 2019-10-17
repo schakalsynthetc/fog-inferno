@@ -1,0 +1,18 @@
+#!/dis/sh.dis
+
+(it argv)=$*;
+
+memfs /tmp;
+
+or {cat $it > /tmp/0}{
+	echo /oops/absent/t $it
+	echo /oops/absent/t $it > /tmp/0
+}
+
+m4 (
+	'-DROOT=/w/eb'
+	'-DTITLE=poo poo poo' 
+	'-D__Y=/tmp/0'
+) /w/eb/e/html/e
+
+unmount /tmp;

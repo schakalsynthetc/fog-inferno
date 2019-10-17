@@ -1,0 +1,16 @@
+body { 
+	background: #000000; color: #AAAAAA; margin: 0 0 0 0 ;
+	font-family: monospace; font-weight: bold; font-size: 8pt;
+}
+A:link    { background: #000000; color: #AAAAEE; text-decoration:none; }
+A:hover   { background: #000077; color: #CCCCFF; text-decoration:none; }
+A:visited { background: #000017; color: #AAAACC; text-decoration:none; }
+
+h1,h2 { color: #707080; }
+textarea { font-family: Monospace; font-weight: bold; font-size: 12pt; color: #A0A0A0; background: #000000; border: 0px solid #707070; }
+.what { color: #909090; font-family: monospace ; font-weight: bold; font-size: 8pt; }
+
+table { margin: 0 0 0 0; padding: 0 0 0 0; }
+tr    { margin: 0 0 0 0; padding: 0 0 0 0; }
+td    { margin: 0 0 0 0; padding: 0 0 0 0; }
+

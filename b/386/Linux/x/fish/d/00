@@ -1,0 +1,11 @@
+#!/! /x/fish/d/00
+
+# mk ##
+
+/x/fish/?/mkfile will evaluate /x/fish/mk/?
+
+/x/fish/y/.../t
+
+touch /x/fish/x/walk
+chmod 777 /x/fish/x/walk
+

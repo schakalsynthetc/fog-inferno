@@ -1,0 +1,27 @@
+i=`{whoami};
+l=`{hostname};
+j=`{/x/today};
+syshost=Linux; objtype=386; b=$syshost/$objtype; B=b/$b/b;
+x=(fish);
+
+# fn list  { q=$1; shift; $q=($$q $*) }
+# fn cons  { q=$1; shift; $q=($$q $*) }
+# fn swons { q=$1; shift; $q=($* $$q) }
+# fn empty { $1=(); }
+# fn index { seq 1 $#$1 }
+
+### shift = name ## pop arg into name and shift 
+
+# /q/domain = `{seq 0 256}
+# /q/regexp = '^[0-9]+$'
+# /a/lphabet/regexp = '^[a-z]$'
+
+# fn lsq { empty qs; cons qs `{ ls $* | grep $'/q/regexp' }; echo $qs }
+# fn lsr { empty rs; cons rs `{ ls $* \ | grep -v $'/q/regexp' \ | grep -v $'/a/lphabet/regexp' } echo $rs }
+
+# fn lsalphabet { empty as; cons as `{ ls $* | grep $'/a/lphabet/regexp' }; echo $as }
+
+# fn repath {
+# 	for (X in (w a b c d e f)) for (x in $$X) if (test -x /$X/$x/:) cons xpath /$X/$x ; 
+# 	for (X in $x) cons path /x/$X ;
+# }

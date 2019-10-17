@@ -1,0 +1,39 @@
+===================
+Compatibility Chart
+===================
+
++---------+----------+-------------------------------------------+
+| CPU     | VM       | OS                                        |
++=========+==========+===========================================+
+| Alpha   | C        | Linux                                     |
++---------+----------+-------------------------------------------+
+| ARM     | | C      | | iOS [1]_                                |
+|         | | Java   | | iOS [1]_                                |
++---------+----------+-------------------------------------------+
+| PowerPC | C        | AIX                                       |
++---------+----------+-------------------------------------------+
+| x86     | | C      | | FreeBSD, NetBSD, OpenBSD, DragonFly BSD,|
+|         |          |   Haiku, OS X, Linux                      |
+|         | | C#     | | Linux, OS X, Windows                    |
+|         | | Go     | | Linux, OS X                             |
+|         | | Forth  | | Linux, OS X, Windows                    |
+|         | | Java   | | Linux, OS X, Windows                    |
+|         | | Lisp   | | Linux, OS X                             |
+|         | | Lua    | | Linux, OS X                             |
+|         | | Perl   | | Linux                                   |
+|         | | Python | | Linux, OS X                             |
+|         | | Ruby   | | Linux, OS X                             |
++---------+----------+-------------------------------------------+
+| x86-64  | | C      | | Linux                                   |
+|         | | Forth  | | Linux [2]_                              |
+|         | | Lisp   | | Linux                                   |
+|         | | Python | | Linux                                   |
+|         | | Ruby   | | Linux                                   |
++---------+----------+-------------------------------------------+
+
+---------
+Footnotes
+---------
+
+.. [1] On a jailbroken device
+.. [2] Requires a 64-bit image; see Implementations.rst for details

@@ -1,0 +1,13 @@
+#!/x/fish/x/!
+{~ $#* 0 && exec /x/fish/ask/t}; t=t; it=$1; shift;
+
+{ test -d $it ||{
+	test -e $it && {>[2] printf ': %s : oops extant file ;\n'; exit 'oops extant file'}; 
+	mkdir -p $it;
+}}
+{ test -e $it/$t ||{
+	{ printf '#!/! %s\n' $it/$t; 
+	for (q in $*) printf ' :%s;' $q; 
+	printf '\n'; 
+	} > $it/$t && chmod 777 $it/$t ;
+}}

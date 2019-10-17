@@ -1,0 +1,58 @@
+#!/! /leaf/d
+
+/leaf/^(fith fog fix fish fiqh)
+	(fith fog fix fish fiqh)^/leaf/t
+
+any /leaf/<type>/ has 'fith,fog,fix,fish,fiqh' subtypes
+
+
+## leaf #
+
+If the leaf type has an index function, numbered files will be the
+elements on the medium, otherwise numbered files are byte offsets.
+
+	p holds all active cursors.
+	q is the index.
+	r is the map.
+
+## type #
+
+	/fix/leaf/T/q/Q/t : index type Q for leaf type T ;
+	/fix/leaf/T/r/R/t : map type R for leaf type T ;
+
+(T may be null.)
+
+These type descriptors are the shebang of the leaf's p,q,r files.
+
+## types #
+
+play
+	playlists for media players
+feed
+	inbox as in mail, rss, etc
+edit
+	interactive editor (compare sam or ed)
+text
+	documents of various kinds
+live
+	realtime
+cell
+	spreadsheet
+book
+	hypercard stack type things
+grid
+	square matrix
+draw
+	interactive graphics
+graf
+	directed graphs
+
+q/ 
+	feed time tractor
+
+fith
+	fith image
+fish
+	fish repl
+fiqh
+	fiqh workspace

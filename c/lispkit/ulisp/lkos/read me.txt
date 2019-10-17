@@ -1,0 +1,14 @@
+object.c
+object.h
+object.stk
+
+are the files from STKLOS version 0.82 (2006 12 19) that were used as a reference for the implementation of LKOS
+
+basically, the C code went into Squeak class LKOSInstance, while the Scheme code went into lkos.scm
+
+STKLOS in a work by Erick Gallesio <eg@unice.fr>
+http://stklos.net
+
+it is itself a variation of Tiny CLOS by Gregor Kickzales 
+
+

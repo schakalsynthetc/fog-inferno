@@ -1,0 +1,7 @@
+#!/x/rc
+qs=()
+qseq=`{seq 0 256}
+
+for (dir in $*) {
+	for (it in $qseq) if (test -e $dir/$it) cons qs $it 
+}

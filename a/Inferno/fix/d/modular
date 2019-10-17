@@ -1,0 +1,16 @@
+#!/! /fix/d/modular
+
+every 9p operation is dispatched to a dis module specified at init time.
+
+the modules get the qid of the file and can further dispatch to an operation module specific to the file's type (as determined by the qid).
+
+default calls are performed by a stack of modules, allowing the fs to layer features.
+
+## feature modules
+### network backing store: writes are forwarded to a backing store server
+### advanced permissions: stat and wstat consult a service
+### proxied files and directories: for host fs, fiqh image, http service, etc
+
+iofile command serves a file calling out to a reader/writer module
+iodir command serves a dir with walk, open, close, stat, wstat modules
+

@@ -1,0 +1,9 @@
+#!/! /x/fish/line/d
+
+## fish "line" #
+generalizes the "status line" of tmux, wmii, and the like.
+
+### acme # generally, uses the top tag as "status line".
+### tmux # uses tmux's built in status line.
+### riot # the line is an standalone app derived from the wmii status line.
+### fiqh # line is a morph in the morphic world

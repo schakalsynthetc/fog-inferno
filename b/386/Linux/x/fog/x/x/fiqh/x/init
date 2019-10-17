@@ -1,0 +1,9 @@
+#!/x/rc
+ROOT=/fiqh; A=$1; B=b/386/Linux/b;
+
+cd $ROOT/$A; 
+
+P=`{printf '%s/%s/p/%0.8X/%0.8X/%0.8X' $ROOT $A $pid `{date -n} 0};
+mkdir -p $P; printf '#!/! %s\n' $P/t > $P/t; chmod 777 $P/t; 
+
+printf $P; exec $ROOT/$B/cog/b $ROOT/$A/0.image >> $P/1 >>[2] $P/2

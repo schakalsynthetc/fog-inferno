@@ -1,0 +1,14 @@
+LEFT=/y/00/w/eb
+IT=00/00/00
+
+A=$LEFT/a/$IT
+C=$LEFT/c/$IT
+F=$LEFT/f/$IT
+Q=$LEFT/q/$IT
+R=$LEFT/r/$IT
+W=$LEFT/w/$IT
+
+index:V: 
+	markdown < $LEFT/$IT > $LEFT/y/$IT
+	m4 $LEFT/a/m4/a e/html/e > $LEFT/y/index.html
+

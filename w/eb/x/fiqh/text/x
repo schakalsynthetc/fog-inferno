@@ -1,0 +1,6 @@
+#!/dis/sh.dis
+
+uri=$1;
+m4 -D '__URI__='^$uri head;
+cat $1;
+m4 -D '__URI__='^$uri foot;

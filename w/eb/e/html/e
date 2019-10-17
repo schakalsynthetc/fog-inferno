@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html> 
+include(ROOT`/e/html/head/e')dnl 
+include(ROOT`/e/html/body/e')dnl
+</html>
+<!--/fiqh/: /w/eb/ e/html/t :
+	ROOT : __ROOT ;
+	TITLE : __TITLE ;
+	Y : __Y ;
+;-->

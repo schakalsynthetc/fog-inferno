@@ -1,0 +1,14 @@
+#!/x/rc
+right=$*; left='/x'; y=`{pwd};
+
+for (x in $right) {
+	{ test -d $left/$x && { left=$left/$x; shift }} || {
+		test -f $left/$x && {{test -x $left/$x &&{left=$left/$x; shift;}|| echo oops $x}}
+	}
+}
+
+{ test -f $left && test -x $left && {
+	echo exec $y ':' $left $* ';' 
+	exec $left $*
+  }
+} || echo oops $left : $* ';'

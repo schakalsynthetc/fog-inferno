@@ -1,0 +1,5 @@
+# /x/init/x/net
+
+or {ftest -e /net/dns} {ndb/dns}
+or {ftest -e /net/cs} {ndb/cs}
+

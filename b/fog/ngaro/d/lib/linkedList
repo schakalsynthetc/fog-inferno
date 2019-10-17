@@ -1,0 +1,116 @@
+============
+Linked Lists
+============
+
+--------
+Overview
+--------
+While linked lists are a simple data structure, they are very useful.
+This vocabulary provides a foundation for creating and using them in
+a predicatable, consistent way.
+
+The **linkedList'** vocabulary provides support for single linked
+lists, and allos for creation and use of both back linked and forward
+linked lists.
+
+
+Back Linked Lists
+=================
+In this form a list consists of a series of nodes that each point to
+the prior node. The list pointer variable is updated with each **b.add**
+or **b.remove** to point to the newest node in the chain.
+
+All functions for operating on this list type are prefixed by **b.**
+
+
+Forward Linked Lists
+====================
+In a forward linked list, each node points to the following node. The
+list pointer variable is not changed by adding or removal of nodes.
+
+All functions for operating on this list type are prefixed by **f.**
+
+
+--------
+Examples
+--------
+
+Creating A List
+===============
+::
+
+  ^linkedList'new: L
+
+
+Adding A Value To A List
+========================
+::
+
+  ( back linked )
+  100 L ^linkList'b.add
+
+  ( forward linked )
+  100 L ^linkList'f.add
+
+
+Removing A Value From A List
+============================
+::
+
+  ( back linked )
+  L ^linkList'b.remove
+
+  ( forward linked )
+  L ^linkList'f.remove
+
+
+Accessing A Specific Node
+=========================
+::
+
+  ( back linked )
+  10 L ^linkList'b.nth
+
+  ( forward linked )
+  10 L ^linkList'f.nth
+
+
+---------
+Functions
+---------
++--------------+-------+-----------------------------------------------+
+| Name         | Stack | Usage                                         |
++==============+=======+===============================================+
+| node         | "-    | Structure for list nodes                      |
++--------------+-------+-----------------------------------------------+
+| .prior       | a-a   | Access prior node field                       |
++--------------+-------+-----------------------------------------------+
+| .next        | a-a   | Access next node field                        |
++--------------+-------+-----------------------------------------------+
+| .value       | a-a   | Access value field                            |
++--------------+-------+-----------------------------------------------+
+| new:         | "-    | Create a list. This gives a variable pointing |
+|              |       | to a **node** structure                       |
++--------------+-------+-----------------------------------------------+
+| b.add        | nL-   | Add a value to a list. Allocates a new node   |
++--------------+-------+-----------------------------------------------+
+| b.remove     | L-n   | Remove a node from a list and return its value|
++--------------+-------+-----------------------------------------------+
+| b.addNode    | NL-   | Add a node to a list                          |
++--------------+-------+-----------------------------------------------+
+| b.removeNode | L-N   | Remove a node from a list. Returns the node   |
++--------------+-------+-----------------------------------------------+
+| b.nth        | nL-N  | Return the *nth* node from the list. Indexing |
+|              |       | starts at *1*.                                |
++--------------+-------+-----------------------------------------------+
+| f.add        | nL-   | Add a value to a list. Allocates a new node   |
++--------------+-------+-----------------------------------------------+
+| f.remove     | L-n   | Remove a node from a list and return its value|
++--------------+-------+-----------------------------------------------+
+| f.addNode    | NL-   | Add a node to a list                          |
++--------------+-------+-----------------------------------------------+
+| f.removeNode | L-N   | Remove a node from a list. Returns the node   |
++--------------+-------+-----------------------------------------------+
+| f.nth        | nL-N  | Return the *nth* node from the list. Indexing |
+|              |       | starts at *1*.                                |
++--------------+-------+-----------------------------------------------+

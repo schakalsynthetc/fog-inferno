@@ -1,0 +1,12 @@
+#!/x/rc
+# walkies where q0 q1 (128 = 0x80 = dir, 0 = 0x00 = file)
+#
+#
+{~ $#* 0 && y=`{pwd}} || {y=$1;shift}; ql='0';qr='0'; {~ $#1 0 || ql=$1;shift}; {~ $#1 0 || qr=$1;shift};
+
+@{cd $y && {
+	find . -type d | sed 's/\.\///' | enum | qons 128 $ql $qr ;
+	find . -type f | sed 's/\.\///' | enum | qons 0 $ql $qr ;
+} | awk '{printf("%0.2X %0.8X %0.8X %0.8X %s\n",$1,$2,$3,$4,$5)}' 
+
+}

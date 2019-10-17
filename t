@@ -1,0 +1,1 @@
+#!/fiqh/inferno/! t

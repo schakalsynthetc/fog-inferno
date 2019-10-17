@@ -1,0 +1,105 @@
+acme
+	dis
+	wiki
+		+
+appl
+	NOTICE
+	acme
+		+
+	charon
+		+
+	cmd
+		+
+	grid
+		+
+	lib
+		+
+	mapreduce
+		+
+	math
+		+
+	mkfile
+	svc
+		+
+	wm
+		+
+dis
+	bind.dis
+	cat.dis
+	cd.dis
+	cp.dis
+	echo.dis
+	ed.dis
+	emuinit.dis
+	limbo.dis
+	ls.dis
+	mk.dis
+	mount.dis
+	os.dis
+	pwd.dis
+	rm.dis
+	sed.dis
+	sh.dis
+	sort.dis
+	uniq.dis
+	sh
+		+
+	lib
+		arg.dis
+		bufio.dis
+		env.dis
+		libc0.dis
+		filepat.dis
+		daytime.dis
+		string.dis
+		readdir.dis
+		regex.dis
+		workdir.dis
+fonts
+	vera
+		Vera
+			+
+		VeraMono
+			+
+keydb
+	countersigned
+	signed
+lib
+	+
+locale
+	timezone
+man
+mkconfig
+mkfiles
+	+
+mnt
+	acme
+	factotum
+	registry
+module
+	+
+n
+services
+	httpd
+		httpd.rewrite
+		httpd.suff
+	logs
+	webget
+		help.html
+		inferno.gif
+		start.html
+		vnlogo.gif
+	wiki
+		+
+sys
+	+
+tmp
+usr
+	inferno
+		charon
+			*
+		keyring
+		lib
+			*
+		namespace
+		README

@@ -1,0 +1,18 @@
+<style type="text/css">
+body { 
+	background: #454545 url(bg.jpeg) ; color:#AAA; 
+	margin: 0 0 0 0 ; 
+	padding: 0 0 0 0 ; 
+}
+
+A:link { background:#000; color:#AAE; text-decoration:none; }
+A:hover { background:#007; color:#CCF; }
+A:visited { color:#AAC; background:#000017; text-decoration:none; }
+
+h1,h2,h3,h4 { font-family: sans-serif ; font-style:bold; font-size:12pt; }
+
+table,tr,td,ul,ol,div,pre,p { padding:0; margin:0; }
+
+td { background:#000; color:#AAA; padding: 4pt;  }
+
+</style>

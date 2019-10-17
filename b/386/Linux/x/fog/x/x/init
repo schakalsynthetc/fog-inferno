@@ -1,0 +1,2 @@
+#!/x/rc
+init=(); for (x in $*) {test -f $ROOT/x/init/x/$x && init=($x $init)}; exec $B/emu /x/init/x/init $init

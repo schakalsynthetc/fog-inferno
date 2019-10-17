@@ -1,0 +1,2 @@
+@set JACALVERSION 1c2
+@set JACALDATE June 2010

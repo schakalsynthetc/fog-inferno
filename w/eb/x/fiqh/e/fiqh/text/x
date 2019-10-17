@@ -1,0 +1,18 @@
+#!/dis/sh.dis
+uri=$1; l=blue; f = /w/eb/x/fiqh/e/fiqh/text ; 
+
+oops=(run /w/eb/x/fiqh/oops/x);
+
+init=(m4 -D '__URI__='^$uri $f/init); 
+quit=(m4 -D '__URI__='^$uri $f/quit);
+
+walk=(run $f/walk $uri); eval=(cat);
+
+and {>>[2] /w/eb/x/fiqh/oops/p {
+	or {$init} {$oops init}
+}} {>>[2] /w/eb/x/fiqh/oops/p {
+	{$walk | {or {$eval} {$oops eval}}} || {$oops walk}
+}} {>>[2] /w/eb/x/fiqh/oops/p {
+	or {$quit} {$oops quit}
+}}
+

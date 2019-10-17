@@ -1,0 +1,29 @@
+#!/x/rc -l
+ROOT=`{pwd}; Y=$ROOT; B=$ROOT/b/$objtype/$syshost/b; init=$*;
+
+{ test -d $ROOT/x/init && test -d $ROOT/x/init/x && {
+		test -f $ROOT/x/init/x/init && init=($ROOT/x/init/x/init $init) 
+	} || test -f $ROOT/x/init/x && init=($ROOT/x/init/x $init) ;
+} || {test -f $ROOT/x/init && init=($ROOT/x/init $init)} ; 
+
+;;; {test -f $ROOT/b/$objtype/$syshost/x/init &&{ 
+	init=($ROOT/b/$objtype/$syshost/x/init $init);
+}}; {test -f $ROOT/b/00/$syshost/x/init &&{ 
+	init=($ROOT/b/00/$syshost/x/init $init);
+}}; {test -f $ROOT/b/$objtype/00/x/init &&{ 
+	init=($ROOT/b/$objtype/00/x/init $init) 
+}}; {test -f $ROOT/b/00/00/x/init &&{ 
+	init=($ROOT/b/00/00/x/init $init) 
+}};
+
+{P = `{printf '/00/00/00/p/%0.8X/%0.8X/%0.8X' $pid `{date -n} 0}; mkdir -p $P;
+
+	{ printf '#!/! %s/t\n\n:y: %s :x: \n' $P $ROOT
+	  for (x in $init) { printf '  : %58s ;\n' $x }; printf '\n; '
+	} > $P/t; chmod 777 $P/t;
+
+	{ printf '#!%s/! init\n' $P;
+	  for (x in $init) {printf '\n## %s ' $x && cat $x || printf '#\n'} 
+	} > $P/init; chmod 777 $P/init;
+
+}; cd $P; cat t; {. init $*}

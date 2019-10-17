@@ -1,0 +1,3 @@
+#!/x/rc
+
+for (it in $*) { unvac -c <{echo vac:$it} }

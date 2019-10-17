@@ -1,0 +1,3 @@
+#!/x/fish/x/!
+~ $#x 0 && echo fish || echo $x
+

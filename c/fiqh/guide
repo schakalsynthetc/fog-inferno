@@ -1,0 +1,15 @@
+#!/! /c/fiqh/guide
+
+acme window is a workspace
+	body is 'contents'
+
+exec evaluates smalltalk in workspace context
+
+Get Put flush to image as accept action
+
+Look understands Q//t object references
+
+sync acme dot, selection
+synthesize acme events from squeak
+
+workspace is a leaf with vector map x verbs z wires

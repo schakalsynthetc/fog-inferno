@@ -1,0 +1,5 @@
+#!/! /a/Inferno/x/quit/quit
+
+rm -f /x/init/y/* /x/init/n/*
+
+echo halt > /dev/sysctl

@@ -1,0 +1,2 @@
+#!/x/rc
+it=$1;shift; where=$1;shift; move=(mv -u); t $where $* >/dev/null && $move $it $where/0 && printf '%s/ : %0.8X : %s ;\n' $where `{date -n} $it

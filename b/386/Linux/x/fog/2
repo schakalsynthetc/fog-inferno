@@ -1,0 +1,13 @@
+#!/x/rc -l
+#
+#
+#
+syshost=Linux
+objtype=386
+if (~ $#a 0) a=/0/
+A=$a/.image
+B=/b/$objtype/$syshost/b/fog
+opts=(-plugins $B -vm-sound-alsa $opts)
+cd $a && {
+	>[2] /0/fiqh/stderr exec $B/0 $opts $A $*
+}

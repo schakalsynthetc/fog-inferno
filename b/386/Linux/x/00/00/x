@@ -1,0 +1,10 @@
+#!/x/rc
+
+left=$1 ;shift; it=$1 ;shift; right=$1 ;shift;
+
+printf '(%s %s %s) %s\n' $left $it $right $"*
+
+x=`{printf '/x/%s/%s/%0.2X' $left $right $#*};
+test -x $x && exec $x $*;
+x=`{printf '/x/%s/%s/x' $left $right};
+test -x $x && exec $x $*;

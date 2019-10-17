@@ -1,0 +1,6 @@
+
+%: %/b
+
+%/b: %/c
+	limbo $stem/c && mv $stem.dis $stem/b
+

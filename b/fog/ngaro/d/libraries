@@ -1,0 +1,33 @@
+# Libraries
+
+## Overview
+Retro includes numerous optional libraries that extend the core language in
+useful ways.
+
+Libraries marked as *stable* will be frozen with the first release candidate.
+When frozen, new functionality may be added, but existing functionality must
+not be removed or altered (except to fix bugs).
+
+## The Vocabularies
+| array'       | array.rx       | Alpha      | Create and work with arrays                  |
+| assertion'   | assertion.rx   | Stable     | Assertions for testing code in a sane manner |
+| bad'         | bad.rx         | Stable     | Byte-Level Addressing                        |
+| bstrings'    | bstrings.rx    | Stable     | Byte Packed Strings                          |
+| calendar'    | calendar.rx    | Beta       | Time and Data Calculations                   |
+| canvas'      | canvas.rx      | Stable     | Drawing Functions for VMs supporting it      |
+| casket'      | casket.rx      | Stable     | Web Development                              |
+| char'        | char.rx        | Stable     | Operations on characters                     |
+| decorator'   | decorator.rx   | Stable     | The "decorator" concept (from c.l.f.)        |
+| dissect'     | dissect.rx     | Stable     | Simple core of a decompiler                  |
+| enum'        | enum.rx        | Stable     | Enumerated data sequences                    |
+| forth'       | forth.rx       | Alpha      | Provide traditional Forth functions and more |
+|              |                |            | standard behavior                            |
+| hash'        | hash.rx        | Stable     | Basic hashing functions                      |
+| infix'       | infix.rx       | Stable     | Support for simple infix math                |
+| linkedList'  | linkedList.rx  | Alpha      | Support for linked lists                     |
+| locals'      | locals.rx      | Stable     | Simple, non-reentrant local variables        |
+| math'        | math.rx        | Stable     | Expanded math operations                     |
+| stack'       | stack.rx       | Stable     | Create and use alternate stacks              |
+| struct'      | struct.rx      | Stable     | Create simple data structures                |
+| values'      | values.rx      | Stable     | Create values (a cross between variables and |
+|              |                |            | constants)                                   |

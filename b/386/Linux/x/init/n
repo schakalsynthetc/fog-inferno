@@ -1,0 +1,10 @@
+#!/bin/sh
+
+printf '         n host: %s \n' `hostname`
+
+ifc=enp1s0
+dhcpcd -dG $ifc && mkdir -p /n/ifc/$ifc && ip addr show $ifc > /n/ifc/$ifc/addr 
+printf '#!/bin/sh\ndhcpcd -dG %s\n' $ifc > /n/ifc/$ifc/x
+
+printf '           ifc: %s ; \n' $ifc
+printf '\n'

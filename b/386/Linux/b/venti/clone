@@ -1,0 +1,19 @@
+#!/x/rc -l
+
+m=/l/sd/a/2/m/venti
+
+for (it in $*) {
+	mkdir -p $m/$it
+
+	dd -if /dev/zero -of $m/$it/arena -bs 8192 -count 65536
+	venti/fmtarenas $it $m/$it/arena
+	dd -if /dev/zero -of $m/$it/isect -bs 8192 -count 8192
+	venti/fmtisect $it $m/$it/isect
+
+	{ echo arenas $it/arena 
+	  echo isect $it/isect
+	  echo
+	} >> $m/conf
+	printf '%s ' %it
+}
+

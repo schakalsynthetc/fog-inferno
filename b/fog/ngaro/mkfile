@@ -1,0 +1,20 @@
+ROOT=/fog/ngaro
+
+A=$ROOT/a
+B=$ROOT/b
+C=$ROOT/c
+
+CC=cc
+
+image: a b $C/core
+	$B --image $A --with $C/core > /dev/null
+
+$C/vm/bootstrap:
+	echo oops. you have no bootstrap image. you must obtain one.
+
+a: $C/vm/bootstrap
+	cp $C/vm/bootstrap $A
+
+b: $C/vm/ngaro.c
+	$CC -o $B $C/vm/ngaro.c
+

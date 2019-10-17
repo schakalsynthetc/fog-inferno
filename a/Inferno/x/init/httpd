@@ -1,0 +1,7 @@
+#!/! /x/init/httpd
+
+and{ httpdaddr='tcp!*!6670'
+  }{ test -d '#U*'/l }{ bind -bc '#U*'/l /w/eb/l
+  }{ bind -c /w/eb/x/httpd /dis/svc/httpd
+  }{ svc/httpd/httpd -a $httpdaddr & 
+}

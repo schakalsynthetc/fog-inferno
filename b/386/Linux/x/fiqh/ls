@@ -1,0 +1,48 @@
+#!/x/rc -l
+
+{~ $#* 0} && {
+	y=`{pwd}
+} || {y=$1; shift}
+
+
+fn lstree { ys=`{ls $y}
+
+	printf '[{ %s %s/ y } ' `{basename $y}`{basename -d $y}
+
+	for (y in $ys) {
+		printf '\n  | %s ' `{basename $y}
+		# { printf '\t\t/r/ '; printf '%s, ' `{ls -l $y}; printf ' R\n' }
+	}
+
+	{test -f $y/guide && {
+		printf '\n  | ['
+		cat $y/guide
+		printf '\n] guide ] \n\n'
+	} || {
+		printf '] '
+	}}
+}
+
+fn lsfile {
+	{~ `{basename -d $y} '.' && dir=`{pwd} || dir=`{basename -d $y}}
+	{it = `{basename $y}}
+	printf '[ %s ] y %s/ y ' $it $dir
+}
+
+fn lsexec {
+	{~ `{basename -d $y} '.' && dir=`{pwd} || dir=`{basename -d $y}}
+	{it = `{basename $y}}
+	printf '[ %s ] y %s/ x ' $it $dir
+}
+
+fn lsabsent {
+	{~ `{basename -d $y} '.' && dir=`{pwd} || dir=`{basename -d $y}}
+	{it = `{basename $y}}
+	printf '[ %s ] %s/ absent ' $it $dir
+}
+
+  {{ test -d $y && lstree
+}||{ test -x $y && lsexec
+}||{ test -f $y && lsfile
+}||{ lsabsent }}
+

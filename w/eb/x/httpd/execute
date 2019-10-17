@@ -1,0 +1,26 @@
+#!/dis/sh.dis
+
+load std
+
+W=/w/eb/w; id=0; wid=$W/$id; 
+t=hello; 
+x=/w/eb/x/0/$t
+
+fn readArguments { echo -n '( '; cat $x/a; echo -n ') ' }
+fn readCode { echo '{'; cat $x/c; echo '}' }
+
+fn assign { echo -n ' "'^$1^'": '; cat $2; echo ' , ' }
+
+fn mkFunction { echo 'x.x' '=' function `{readArguments} `{readCode} }
+
+fn assignKeys {
+	for it in $x/r/* { 
+	 	r := `{basename $it}; or { test -f /env/$r && assign $r /env/$r } { assign $r $it } 
+	} 
+}
+
+echo 'var x = { '; assignKeys; echo '} ; '
+mkFunction
+echo 'X.'^$t^' = x ;'
+
+echo -n 'x.x ( '; for i in $* { echo -n '"'^$i^'", ' }; echo ' nil ) ; '

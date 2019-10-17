@@ -1,0 +1,97 @@
+#! /X/t
+#!
+#!
+#!
+#### enum {
+
+	VM_NOP, 
+	VM_LIT, 
+	VM_DUP, 
+	VM_DROP, 
+	VM_SWAP, 
+	VM_PUSH, 
+	VM_POP,
+	VM_LOOP, 
+	VM_JUMP, 
+	VM_RETURN, 
+	VM_GT_JUMP, 
+	VM_LT_JUMP,
+	VM_NE_JUMP,
+	VM_EQ_JUMP, 
+	VM_FETCH, 
+	VM_STORE, 
+	VM_ADD,
+	VM_SUB, 
+	VM_MUL, 
+	VM_DIVMOD, 
+	VM_AND, 
+	VM_OR, 
+	VM_XOR, 
+	VM_SHL,
+	VM_SHR, 
+	VM_ZERO_EXIT, 
+	VM_INC, 
+	VM_DEC, 
+	VM_IN, 
+	VM_OUT,
+	VM_WAIT 
+
+} switch {
+
+#define IP   vm->ip
+#define SP   vm->sp
+#define RSP  vm->rsp
+#define DROP {vm->data[SP]=0;if(--SP<0)IP=IMAGE_SIZE;}
+#define TOS  vm->data[SP]
+#define NOS  vm->data[SP-1]
+#define TORS vm->address[RSP]
+#define NORS vm->address[RSP-1]
+#define MINSP  if (vm->max_sp < SP) vm->max_sp=SP;
+#define MAXRSP if (vm->max_rsp < RSP) vm->max_rsp=RSP;
+#define MINIP  if (IP<0) IP=IMAGE_SIZE;
+#define TWOIP  {if(vm->image[IP+1]==0)IP++;if(vm->image[IP+1]==0)IP++;}
+#define POPIP  TOS=vm->image[IP];
+#define JUMPIF(EXP) IP++;if(EXP)IP=vm->image[IP]-1; DROP DROP
+
+case VM_NOP:     break;
+case VM_LIT:     SP++; IP++; POPIP MINSP break;
+case VM_DUP:     SP++; vm->data[SP]=NOS; MINSP break;
+case VM_DROP:    DROP break;
+case VM_SWAP:    a=TOS; TOS=NOS; NOS=a; break;
+case VM_PUSH:    RSP++; TORS=TOS; DROP MAXRSP break;
+case VM_POP:     SP++; TOS=TORS; RSP--; break;
+case VM_LOOP:    TOS--; IP++; if (TOS !=0 && TOS > -1) IP = vm->image[IP]-1 ; else DROP ; break;
+case VM_JUMP:    IP++; IP=vm->image[IP]-1; MINIP else TWOIP break;
+case VM_RETURN:  IP=TORS; RSP--; MINIP else TWOIP break;
+
+case VM_GT_JUMP: JUMPIF (NOS  > TOS) break;
+case VM_LT_JUMP: JUMPIF (NOS  < TOS) break;
+case VM_NE_JUMP: JUMPIF (TOS != NOS) break;
+case VM_EQ_JUMP: JUMPIF (TOS == NOS) break;
+
+case VM_FETCH:   TOS=vm->image[TOS]; break;
+case VM_STORE:   vm->image[TOS]=NOS; DROP DROP break;
+
+case VM_ADD:     NOS += TOS; DROP break;
+case VM_SUB:     NOS -= TOS; DROP break;
+case VM_MUL:     NOS *= TOS; DROP break;
+case VM_DIVMOD:  a=TOS;b=NOS; TOS = b/a; NOS = b%a; break;
+case VM_AND:     a=TOS;b=NOS; DROP TOS = a & b; break;
+case VM_OR:      a=TOS;b=NOS; DROP TOS = a | b; break;
+case VM_XOR:     a=TOS;b=NOS; DROP TOS = a ^ b; break;
+case VM_SHL:     a=TOS;b=NOS; DROP TOS = b << a; break;
+case VM_SHR:     a=TOS; DROP TOS >>= a; break;
+
+case VM_ZERO_EXIT: if(TOS==0){ DROP IP=TORS; RSP--; } break;
+
+case VM_INC: TOS+=1; break;
+case VM_DEC: TOS-=1; break;
+
+case VM_IN:      a=TOS; TOS=vm->ports[a]; vm->ports[a]=0; break;
+case VM_OUT:     vm->ports[0]=0; vm->ports[TOS]=NOS; DROP DROP break;
+case VM_WAIT:    rxDeviceHandler(vm); break;
+
+default: /* call */
+ 		 RSP++; TORS=IP; IP=vm->image[IP]-1; MINIP else TWOIP MAXRSP break ;
+
+}

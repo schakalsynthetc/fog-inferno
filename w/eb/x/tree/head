@@ -1,0 +1,16 @@
+<head>
+<title>hello tree</title>
+<meta name="viewport" content="width=device-width"/>
+<link rel="stylesheet" href="/xt.css"/>
+<script src="/a/js/lib.js"/>
+<script src="/a/js/elem.js"/>
+<style type="text/css">
+#Y { display: none; font-size: xx-large; font-family: sans-serif; font-weight: bold; }
+
+td.r { background: #202024; color: #7070cc; text-align: right; font-family: sans-serif; }
+td.q { padding-left: 0.2em; font-family: sans-serif; }
+
+</style>
+</head>
+ 
+ <body onload="init();">

@@ -1,0 +1,54 @@
+#!/! /w/eb/x/fiqh/guide
+
+if <path> has a match under /x/fiqh/e/<path> 
+then window is under direction of that leaf
+
+## httpd #
+
+called as GET /x/fiqh/<path> ? <alphabet>
+	:w: which window to use ;
+	
+	:e: consider it an object of type <path> ;
+	:f: presentation form ;
+	
+	:x: do a verb here ;
+	:i: assume identity ;
+		authenticated i has access to owned filesystem
+	:l: assume location ;
+		this may direct where programs run
+	:r: reference context ;
+		where href is inferred from
+	:q: qid of leaf ;
+		web service reserves /q/00/00/00
+	:p: pid of an extant fish process ;
+		none means allocate a fresh one
+	:b: runtime platform of client side ;
+		normally browser, html5, javascript
+		but can be anything we can define
+	:c: language for client side ;
+		normally javascript but etc
+	:a: language and object context ;
+		normally javascript but etc
+		
+/x/httpd/fiqh -> /x/fiqh/x
+
+/x/httpd/fiqh :
+	is a dis module
+	verifies request is proper
+	checks identity credentials
+	spawns the fish
+		makes the ramfs and chans tree for it
+	waits for /x/fiqh/x to return and 
+		tears everything down when it does
+/x/fiqh/x :
+	is an sh script
+	determines the namespace
+	
+	does { indexicals=(i l p q a b c r);
+		{for (t in $indexicals) if {no $t} {t=00/00/00}
+	};
+
+	sees the fish indexically in its namespace
+	and the fiqh leaf
+	signals to /x/httpd/fiqh when it quits
+		so the fish either hangs up or hangs around

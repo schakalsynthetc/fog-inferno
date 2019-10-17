@@ -1,0 +1,13 @@
+#!/dis/sh.dis
+#
+#
+#
+(t it left right)=$*; here=`{pwd}; now=`{u32time};
+
+</w/eb/e/Xt/e m4 (
+	'-D__QID=00/0000/'^$now
+	'-D__T='^$t
+	'-D__IT='^$it
+	'-D__LEFT='^$left
+	'-D__RIGHT='^$right
+)

@@ -1,0 +1,2 @@
+#!/x/rc
+{for (it in $*) { test -e $it || mkdir -p $it; printf '%s ' $it }}

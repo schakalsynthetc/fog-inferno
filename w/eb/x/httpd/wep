@@ -1,0 +1,8 @@
+#!/dis/sh.dis
+load std
+
+fn div {/w/eb/x/ml/unit.dis div $*}
+fn h1 {/w/eb/x/ml/unit.dis h1 $*}
+fn span {/w/eb/x/ml/unit.dis span $*}
+
+h1 banner '/w/' `{span w 0} `{cleanname /x/$uri}

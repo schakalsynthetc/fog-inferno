@@ -1,0 +1,54 @@
+<script type="text/javascript">
+
+</script> 
+<body class="Xt" onload="init()"> 
+<h1> /fiqh/w/eb/ </h1>
+<table id="/00/" class="Xt" width="100%">  
+
+<tr id="/00/00/" class="Xt"> 
+<td class="Xt" id="/00/00/t">t</td> 
+<td class="Xp" contentEditable="true"><p>this is the element called IT.  blee bloo blaa, this is some <a href="">markdown</a> yay</p> </td>
+<td class="Xq">left</td>
+<td class="Xr">right</td>
+</tr>
+
+<tr id="/00/00/" class="Xt"> 
+<td class="Xt" id="/00/00/t">t</td> 
+<td class="Xp" contentEditable="true"><p> </p> </td>
+<td class="Xq">left</td>
+<td class="Xr">right</td>
+</tr>
+
+<tr id="/00/00/" class="Xt"> 
+<td class="Xt" id="/00/00/t">t</td> 
+<td class="Xp" contentEditable="true"><p> </p> </td>
+<td class="Xq">left</td>
+<td class="Xr">right</td>
+</tr>
+
+<tr id="/00/00/" class="Xt"> 
+<td class="Xt" id="/00/00/t">t</td> 
+<td class="Xp" contentEditable="true"><p> </p> </td>
+<td class="Xq">left</td>
+<td class="Xr">right</td>
+</tr>
+
+<tr id="/00/00/" class="Xt"> 
+<td class="Xt" id="/00/00/t">t</td> 
+<td class="Xp" contentEditable="true"><p> </p> </td>
+<td class="Xq">left</td>
+<td class="Xr">right</td>
+</tr>
+
+</table>
+ 
+<script type="text/javascript"> // e/html/body/c /
+
+X=[[[]]]; X[0][0][0]=document.getElementById('/00/00/');
+
+function init(){
+
+} ;
+
+</script>
+</hTml>

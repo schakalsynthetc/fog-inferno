@@ -1,0 +1,21 @@
+#!/! /w/eb/e/html/guide
+
+mkdir -p table/tr/td/^(div span)
+mkdir -p div span ul/li nl/li img p pre code
+
+m4 (
+	'-DROOT=/w/eb'
+	'-DTITLE=poo poo poo' 
+	'-D__Y='^$it
+) /w/eb/e/html/e
+
+for it in (
+	unit 
+	tuple 
+	vector vector/value vector/index
+	map map/index map/key map/value
+	leaf 
+) { 
+	mkdir -p /w/eb/e/$it
+	or{ /x/shebang /w/eb/e/$it }{/x/shebang /w/eb/e/$it/t}
+}

@@ -1,0 +1,11 @@
+#!/dis/sh.dis
+
+load std
+
+echo '<div class="x ps"> <table>'
+
+ps | getlines {
+	echo '<tr><td>' $line '</td></tr>'
+}
+
+echo '</table> </div>'

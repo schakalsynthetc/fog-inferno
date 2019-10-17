@@ -1,0 +1,2 @@
+#!/bin/sh
+ROOT=${ROOT:-/}; exec $ROOT/b/386/Linux/b/emu -r $ROOT /b/dis/Inferno/x/init/x/init "$@"

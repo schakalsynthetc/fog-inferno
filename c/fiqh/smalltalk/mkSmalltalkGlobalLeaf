@@ -1,0 +1,11 @@
+#!/bin/sh
+qid=$1; name=$2;
+
+mkdir -p $qid;
+printf '#!/! /%s/t /fith/smalltalk/global/t\n' $qid $name > $qid/t; chmod 777 $qid/t;
+printf '%s' $name > $qid/r;
+hashstr=`printf '/%s/t %s smalltalk global t\n' $qid $name`;
+hash=`echo $hashstr | sha1sum`;
+printf $hash > $qid/h;
+echo $hash $hashstr
+

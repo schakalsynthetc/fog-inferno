@@ -1,0 +1,27 @@
+#!/dis/sh.dis
+
+load std
+id=`{date -n}; {and{
+	mkdir /w/eb/p/$id
+ }{	memfs /w/eb/p/$id
+ }{	touch /w/eb/p/$id/html /w/eb/p/$id/input
+ }{	{ echo '<div class=echo>'
+ 		echo '<h2><span class="echo t">' $uri '</span></h2>'
+ 		{ echo '<div class="echo qr">';
+ 		   echo '<table class="echo qr">'; for i in /env/* {
+ 			echo '<tr>' '<td class="echo r" id="'$i'">' $i '</td>'
+ 			echo -n '<td class="echo q" id="'$i'">'; 
+ 			cat $i; 
+ 			echo '</td>' '</tr>'
+ 		}; echo '</table>' '</div>' }
+ 		echo '</div>'
+ 	} >/w/eb/p/$id/input
+ }{	TITLE=(hello echo); 
+ 	ID=$id; CLASS=(x skronk); 
+ 	STYLE=(xt);
+ 
+ 	</w/eb/f/html m4 (
+ 		-D 'TITLE=helloEcho' 
+ 		-D 'ID='$id -D 'CLASS=x'
+ 	)>/w/eb/p/$id/html
+}{ cat /w/eb/p/$id/html }}

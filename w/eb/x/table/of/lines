@@ -1,0 +1,8 @@
+#!/x/rc
+
+row=$1; # 'row/of/<type>'
+
+printf '<table>\n'
+cat | awk '{print "/w/eb/x/table/'^$row^' "$0 }' |/x/rc
+printf '</table>\n'
+ 

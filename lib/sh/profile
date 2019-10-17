@@ -1,0 +1,6 @@
+#!/dis/sh.dis
+# emu sh initialisation here
+load std
+
+home=/usr/^"{cat /dev/user}; if {ftest -d $home} {} {cp -r /usr/inferno $home};
+cd $home || {mount -a {mntgen} /usr; bind /usr/inferno $home; cd $home}

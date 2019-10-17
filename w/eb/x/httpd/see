@@ -1,0 +1,8 @@
+#!/dis/sh.dis
+
+load std
+
+where=$url;
+
+if {test -f $where/w/eb/x} {os $where/w/eb/x $q} {echo oops}
+

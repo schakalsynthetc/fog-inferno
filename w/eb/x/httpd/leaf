@@ -1,0 +1,7 @@
+#!/dis/sh.dis
+
+load std;
+
+y=$uri;
+
+run /w/eb/x/leaf/x $y;

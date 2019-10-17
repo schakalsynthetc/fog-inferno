@@ -1,0 +1,6 @@
+<script lang="javascript" type="text/javascript"> 
+function init() {
+	y = document.getElementById("Y").innerText;
+	treeTable = xget("/x/tree/" + y + "?x=table");
+	document.getElementById("TREE").innerHTML = treeTable;
+} </script>

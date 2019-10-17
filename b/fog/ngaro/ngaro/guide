@@ -1,0 +1,2 @@
+dd if=/b/0/0 of=0 bs=8192
+dd if=/a/0/0 of=0 bs=8192 seek=8

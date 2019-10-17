@@ -1,0 +1,30 @@
+# to update: cat $HOME/lib/plumbing | 9p write plumb/rules
+
+editor = acme
+
+plumb to oops
+plumb to xy
+
+type is oops
+plumb to oops
+plumb client /x/oops $src $dst $type $wdir $ndata
+
+type is text
+data matches 'X ?/?(.+) (.+) Y ?/?(.+)'
+arg isfile $1
+plumb to xy 
+plumb start /x/plumb/xy $3 $1 $2
+
+type is text
+data matches 'X ?/?(.+) (.+) Y ?/?(.+)'
+arg isfile /x/$1
+plumb to xy 
+plumb start /x/plumb/xy $3 /x/$1 $2
+
+type is text
+data matches '/x/(.+) (.+)'
+arg isfile /x/$1
+plumb to xy
+plumb start /x/plumb/xy /dev/stdout /x/$1 $2
+ 
+include /w/acme/rules

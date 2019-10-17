@@ -1,0 +1,15 @@
+# source pppp
+
+shebang and head comment
+implement,include,import block
+module
+globals
+init (eval, walk, quit)
+functions
+
+oops
+sysfatal
+badmod
+usage
+argv
+loadmods

@@ -1,0 +1,53 @@
+#!/dis/sh.dis
+
+load std; y=$1; it=$1; w=/tmp; e=/w/eb/e/leaf;
+
+fn m4def { echo 'define(`'^$1^''',`'^$2^''')dnl' >> /tmp/Xt }
+
+memfs /tmp; 
+
+mkdir -p /tmp/0; touch /tmp/0/t /tmp/0/0 /tmp/0/q /tmp/0/r ;
+
+{ test -f $y/t && cat $y/t > /tmp/0/t };
+{ test -f $y/0 && cat $y/0 > /tmp/0/0 };
+{ test -f $y/q && cat $y/q > /tmp/0/q };
+{ test -f $y/r && cat $y/r > /tmp/0/r };
+
+touch /tmp/m; mkdir /tmp/q; rawdbfs /tmp/m /tmp/q;
+cat < /dev/null > /tmp/q/new ;
+mkdir /tmp/r; touch /tmp/r/0;
+
+for x in (Xt Xp Xq Xr) { 
+	m4def $x^TAG 'td' ; 
+	m4def $x^CLASS $x^' leaf' ; 
+}
+			
+{ ls $y | getlines { it=$line;
+	{ cat < /dev/null > /tmp/q/0; 
+	  { cat /tmp/Xt;
+	  	run /w/eb/x/leaf/t $it $y /tmp ;
+	  	run /w/eb/x/leaf/p $it $y /tmp ;
+	  	run /w/eb/x/leaf/q $it $y /tmp ;
+	  	run /w/eb/x/leaf/r $it $y /tmp ;
+	  } | m4 -D'Y='^$y -D'IT='^`{basename $it} > /tmp/q/0
+	} && { run /w/eb/x/leaf/xq $it $y $w 
+	} && { cat /tmp/q/0 > /tmp/q/new }
+}}
+
+{ test -f $y/guide && cat $y/guide >> /tmp/r/0 }
+
+{ m4def IT $y; 
+	run /w/eb/x/leaf/xp $y $y $w ;
+	run /w/eb/x/leaf/xr $y $y $w ;
+	run /w/eb/x/leaf/xt $y $y $w ;
+}
+
+m4 /tmp/Xt /w/eb/e/leaf/html > /tmp/index.html ; cat /tmp/index.html ;
+
+and { now=`{date -n}; 
+}{ 
+}{ cd /tmp && puttar . > /w/eb/m/leaf/$now 
+}{ echo /w/eb/m/leaf/$now >> /w/eb/m/leaf/q
+}{ 
+}{ unmount /tmp/q }{ unmount /tmp }
+

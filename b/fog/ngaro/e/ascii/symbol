@@ -1,0 +1,128 @@
+ 0x00    0  nul	null
+ 0x01    1  soh	start of heading
+ 0x02    2  stx	start of text
+ 0x03    3  etx	end of text
+ 0x04    4  eot	end of transmission
+ 0x05    5  ask	enquiry
+ 0x06    6  yes	acknowledge
+ 0x07    7  bel	bell
+ 0x08    8  bs	backspace
+ 0x09    9  ht	horizontal tabulation
+ 0x0a   10  nl	line feed
+ 0x0b   11  vt	vertical tabulation
+ 0x0c   12  page	form feed
+ 0x0d   13  cr	carriage return
+ 0x0e   14  so	shift out
+ 0x0f   15  si	shift in
+ 0x10   16  dle	data link escape
+ 0x11   17  dc1	device control one
+ 0x12   18  dc2	device control two
+ 0x13   19  dc3	device control three
+ 0x14   20  dc4	device control four
+ 0x15   21  no	negative acknowledge
+ 0x16   22  idle	synchronous idle
+ 0x17   23  etb	end of transmission block
+ 0x18   24  oops	cancel
+ 0x19   25  em	end of medium
+ 0x1a   26  sub	substitute
+ 0x1b   27  esc	escape
+ 0x1c   28  tree	file separator
+ 0x1d   29  vector	group separator
+ 0x1e   30  map	record separator
+ 0x1f   31  unit	unit separator
+ 0x20   32  space	space
+ 0x21   33  bang	exclamation mark
+ 0x22   34  quote	quotation mark
+ 0x23   35  hash	number sign
+ 0x24   36  dollar	dollar sign
+ 0x25   37  mod	percent sign
+ 0x26   38  amp	ampersand
+ 0x27   39  apos	apostrophe
+ 0x28   40  op	left parenthesis
+ 0x29   41  cp	right parenthesis
+ 0x2a   42  astk	asterisk
+ 0x2b   43  plus	plus sign
+ 0x2c   44  comma	comma
+ 0x2d   45  hyphen	hyphen-minus
+ 0x2e   46  stop	full stop
+ 0x2f   47  walk	solidus
+ 0x30   48  zero	digit zero
+ 0x31   49  one	digit one
+ 0x32   50  digit	digit two
+ 0x33   51  digit	digit three
+ 0x34   52  digit	digit four
+ 0x35   53  digit	digit five
+ 0x36   54  digit	digit six
+ 0x37   55  digit	digit seven
+ 0x38   56  digit	digit eight
+ 0x39   57  digit	digit nine
+ 0x3a   58  colon	colon
+ 0x3b   59  semi	semicolon
+ 0x3c   60  lt	less-than sign
+ 0x3d   61  eq	equals sign
+ 0x3e   62  gt	greater-than sign
+ 0x3f   63  case	question mark
+ 0x40   64  at	commercial at
+ 0x41   65  char	latin capital letter a
+ 0x42   66  char	latin capital letter b
+ 0x43   67  char	latin capital letter c
+ 0x44   68  char	latin capital letter d
+ 0x45   69  char	latin capital letter e
+ 0x46   70  char	latin capital letter f
+ 0x47   71  char	latin capital letter g
+ 0x48   72  char	latin capital letter h
+ 0x49   73  char	latin capital letter i
+ 0x4a   74  char	latin capital letter j
+ 0x4b   75  char	latin capital letter k
+ 0x4c   76  char	latin capital letter l
+ 0x4d   77  char	latin capital letter m
+ 0x4e   78  char	latin capital letter n
+ 0x4f   79  char	latin capital letter o
+ 0x50   80  char	latin capital letter p
+ 0x51   81  char	latin capital letter q
+ 0x52   82  char	latin capital letter r
+ 0x53   83  char	latin capital letter s
+ 0x54   84  char	latin capital letter t
+ 0x55   85  char	latin capital letter u
+ 0x56   86  char	latin capital letter v
+ 0x57   87  char	latin capital letter w
+ 0x58   88  char	latin capital letter x
+ 0x59   89  char	latin capital letter y
+ 0x5a   90  char	latin capital letter z
+ 0x5b   91  oq	left square bracket
+ 0x5c   92  meta	reverse solidus
+ 0x5d   93  cq	right square bracket
+ 0x5e   94  expt	circumflex accent
+ 0x5f   95  any	low line
+ 0x60   96  tick	grave accent
+ 0x61   97  char	latin small letter a /r/0041
+ 0x62   98  char	latin small letter b /r/0042
+ 0x63   99  char	latin small letter c /r/0043
+ 0x64  100  char	latin small letter d /r/0044
+ 0x65  101  char	latin small letter e /r/0045
+ 0x66  102  char	latin small letter f /r/0046
+ 0x67  103  char	latin small letter g /r/0047
+ 0x68  104  char	latin small letter h /r/0048
+ 0x69  105  char	latin small letter i /r/0049
+ 0x6a  106  char	latin small letter j /r/004a
+ 0x6b  107  char	latin small letter k /r/004b
+ 0x6c  108  char	latin small letter l /r/004c
+ 0x6d  109  char	latin small letter m /r/004d
+ 0x6e  110  char	latin small letter n /r/004e
+ 0x6f  111  char	latin small letter o /r/004f
+ 0x70  112  char	latin small letter p /r/0050
+ 0x71  113  char	latin small letter q /r/0051
+ 0x72  114  char	latin small letter r /r/0052
+ 0x73  115  char	latin small letter s /r/0053
+ 0x74  116  char	latin small letter t /r/0054
+ 0x75  117  char	latin small letter u /r/0055
+ 0x76  118  char	latin small letter v /r/0056
+ 0x77  119  char	latin small letter w /r/0057
+ 0x78  120  char	latin small letter x /r/0058
+ 0x79  121  char	latin small letter y /r/0059
+ 0x7a  122  char	latin small letter z /r/005a
+ 0x7b  123  ox	left curly bracket
+ 0x7c  124  pipe	vertical line
+ 0x7d  125  cx	right curly bracket
+ 0x7e  126 join	tilde
+ 0x7f  127  del	delete

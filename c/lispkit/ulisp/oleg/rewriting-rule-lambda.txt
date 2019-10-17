@@ -1,0 +1,585 @@
+From posting-system@google.com Sun Dec 16 16:14:09 2001
+Date: Sun, 16 Dec 2001 13:14:02 -0800
+From: oleg@pobox.com (oleg@pobox.com)
+Newsgroups: comp.lang.functional,comp.lang.scheme
+Subject: Re-writing abstractions, or Lambda: the ultimate pattern macro
+Message-ID: <7eb8ac3e.0112161314.5b86b826@posting.google.com>
+Status: OR
+
+A practical topic of this message is making programming of
+pattern-based rewriting systems more intuitive. It is far from trivial
+to build complex re-writing rules from simpler ones, in head-first
+pattern-based rewriting systems. The familiar idioms of a 'function
+call' and a functional composition -- let alone higher-level
+combinators such as fold -- do not easily apply.
+
+This article proposes a solution: continuation-passing-style (CPS)
+coupled with a macro-lambda. The solution makes it trivial to compose
+re-writing rules and to use higher-order rule combinators. We can code
+re-writing rules using traditional, well-understood applicative
+programming idioms. The solution relies on a first-class denotation
+for a future re-writing.
+
+The article will illustrate the proposed technique on several examples
+-- from practical to bizarre. The most complex example is a
+normal-order evaluator for untyped lambda-calculus, implemented as a
+R5RS macro. More practical illustrations are discussed in an earlier
+article [1], which aimed to make programming of re-writing systems
+(R5RS macros) more like a craft than a witchcraft.
+
+Throughout this message you will see several kinds of lambdas -- a
+lambda of lambda calculus, a rewriting-rule lambda, and a lambda of
+Scheme. Each is handled by its own evaluator, yet they look
+similar. In fact, the former and the latter lambda forms are
+identical. In all the cases, the lambda forms play the same role: a
+_denotation_ for a parameterized future evaluation. The evaluation
+occurs in different ways, yet the idea of delaying an action and
+passing its promise as a first-class object is universal.
+
+	* R5RS macros -- head-first pattern-based re-writing system
+	* Why coding of head-first pattern-based re-writing systems is
+	  so difficult
+	* Macro-CPS programming
+	* Lambda-calculator as an R5RS macro
+	* Related work
+	* References
+
+
+* R5RS macros -- head-first pattern-based re-writing system
+
+We will use R5RS macros as a representative head-first pattern-based
+re-writing system. R5RS macros are the "blessed" macro facility of
+Scheme, defined in the Revised5 Report on Scheme (R5RS) [2]. They are
+also called hi-level, define-syntax or hygienic macros, to distinguish
+them from a defmacro facility. The latter system is inherited from
+Lisp. A defmacro expander is the Scheme evaluator itself, hence
+defmacro is essentially a Scheme code that runs at compile time.
+
+The R5RS macro system is a completely different language. It is a
+re-writing system based on pattern-matching. Unlike the Scheme
+evaluator, which is call-by-value, a R5RS macro-expander applies
+reductions in the normal order, that is, leftmost first. A reduction
+step is matching against a set of patterns and replacement of the
+matched expression by a template. There is no guarantee that a given
+expression has a normal form, nor there is a guarantee that the
+macro-expander always finds the normal form when there is one.
+
+One can say that perhaps the R5RS macro system is closer to a Haskell
+(typechecker) than to Scheme. Patterns are linear and matching is
+based on (deep) equality.  Unfortunately, R5RS patterns cannot have
+guards or other constraints. OTH, R5RS patterns have a special '...'
+pattern. Furthermore, R5RS macros are hygienic:
+
+"Identifiers that appear in the template but are not pattern variables
+or the identifier ... are inserted into the output as literal
+identifiers. If a literal identifier is inserted as a free identifier
+then it refers to the binding of that identifier within whose scope
+the instance of syntax-rules appears. If a literal identifier is
+inserted as a bound identifier then it is in effect renamed to prevent
+inadvertent captures of free identifiers." [4]. 
+
+In this article, we will call such renaming 'coloring' of an
+identifier [3]. R5RS macro system is defined in [4].
+
+
+* Why coding of head-first pattern-based re-writing systems is so
+difficult
+
+Such a fundamental idiom as a 'function call' does not immediately
+apply to our re-writing system. Ditto for higher-order combinators
+such as fold.
+
+For example, let's consider a function 
+    app_rev:: ([a] -> b, [a]) -> b
+
+that takes two arguments and applies the first argument to the reverse
+of the list given as the second argument.  In most programming
+languages, this function is trivial:
+
+    app_rev (f,lst) = f (reverse lst)
+
+We are confident that by the time f needs the value of its argument,
+the reverse of lst will be computed. This computation may be carried
+out a bit earlier than that, depending on the evaluator.
+
+Things are not that simple for R5RS macros. The macro that reverses a
+list is easy to define:
+
+(define-syntax m-reverse
+  (syntax-rules ()
+    ((m-reverse lst)		; pattern
+     (letrec-syntax
+	 ((loop
+	   (syntax-rules ()
+	     ((loop () accum)		  ; pattern
+              accum)			  ;    re-writes into this
+	     ((loop (x . rest) accum)	  ; another pattern
+	      (loop rest (x . accum)))))) ; template 
+       (loop lst ())))))
+
+We rely on an ancillary tail-recursive re-writing rule 'loop' that
+moves elements from its first argument to the second, the
+accumulator. Pattern (x . tail) in Scheme is identical to (x:tail) in
+Haskell.
+
+
+(m-reverse (1 2 3 4 5)) ; ==expands-to==> (5 4 3 2 1)
+
+We are then tempted to define app_rev as
+
+(define-syntax app_rev
+  (syntax-rules ()
+    ((app_rev f lst)		; pattern
+     (f (m-reverse lst))	; template of the re-written expression
+   )))
+
+If we try to expand (app_rev quote (1 2 3 4 5)), we might expect to
+see '(5 4 3 2 1). In reality, we get '(m-reverse (1 2 3 4 5)). We
+may hope that
+    (app_rev m-reverse (1 2 3 4 5))
+expands to the original list, (1 2 3 4 5). In reality,
+    (app_rev m-reverse (1 2 3 4 5))
+is re-written to
+    (m-reverse (m-reverse (1 2 3 4 5)))
+then to
+    ((1 2 3 4 5) m-reverse)
+and the latter raises an error because the syntax m-reverse is being
+used inappropriately.
+
+We can see the problem: in many programming languages, a function can
+force evaluation of an argument expression just by using its value. In
+strict languages, argument expressions are always evaluated, at the
+time of the call. In a head-first re-writing system, a rule can force
+expansion of a subrule only by placing the subrule in the head
+position of the re-written expression. In that case however, the outer
+rule can't get hold of the subrule's result. A re-writing rule
+_cannot_ "invoke" the other rule and have the control return back with
+the result.
+
+Head-fist re-writing systems are anti-functional
+(anti-applicative). We cannot easily compose more complex rules from
+simpler ones. We lose the all-important modularity principle. That's
+why writing R5RS macros are so complex. That's why we have to resort
+to contortions and hacks even in simple cases (R5RS, Section 7.3).
+
+Enter Ultimate Lambda. It makes R5RS macros functional, it restores
+the modularity principle, it makes possible even higher-order
+combinators.
+
+
+* Macro-CPS programming
+
+The magic bullet is a form that denotes a parameterized future
+re-writing action:
+
+	      (??!lambda (bound-var) body)
+Here 'body' is an expression, bound-var is a variable, and ??!lambda
+is just a symbol. Not a macro, not a special syntax -- just a
+symbol. The 'body' may contain a form (??! bound-var). The ??!lambda-form
+is just a form.  It is interpreted by a re-writing rule ??!apply. To
+be more precise,
+     (??!apply (??!lambda (bound-var) body) arg)
+expands to 'body', with all non-shadowed instances of (??!  bound-var)
+replaced by 'arg'.
+
+In Scheme, question and exclamation marks are considered ordinary
+characters. Hence ??!lambda, ??!apply and ??! are ordinary symbols --
+albeit weirdly looking, on purpose.
+
+The definition of ??!apply is given in [1]. Again, ??!lambda is not a
+macro, is not a special syntax -- it is just a regular, unbound
+symbol.
+
+The second ingredient to our solution is a continuation-passing style
+(CPS). We will require re-writing rules to receive an extra argument,
+a continuation. When a rule has computed its expansion, it should
+??!apply the received continuation to the result. This convention
+confers functional composition and functional invocation. If rule foo
+wants to 'invoke' rule bar, it should expand to (bar args
+continuation) and encode in the 'continuation' argument whatever
+processing needs to be done with the bar's result. The ??!lambda form
+makes encoding of such future parameterized processing trivial.
+
+Let us re-write the previous example using the macro-lambda:
+
+(define-syntax ?reverse ; reverse in CPS
+  (syntax-rules ()
+    ((_ _lst _k)
+     (letrec-syntax
+	 ((loop
+	   (syntax-rules ()
+	     ((loop () accum k)		; pattern
+	      (??!apply k accum))	; its expansion
+	     ((loop (x . rest) accum k) ; the second pattern
+	      (loop rest (x . accum) k))))) ; its expansion
+       (loop _lst () _k)))))
+
+The leading question mark or underscores have no syntactic
+significance. Question mark is a regular "letter" in Scheme; it may
+occur in identifiers at any position.
+
+The app_rev function of the previous section can trivially be defined as
+
+(define-syntax ?app_rev
+  (syntax-rules ()
+    ((_ f lst k)
+     (?reverse lst (??!lambda (reversed) (f (??! reversed) k))))))
+
+A form
+
+(?reverse (1 2 3 4 5)
+   (??!lambda (result) (display '(??! result))))
+==expands-to==> (display '(5 4 3 2 1))
+
+whereas
+
+(?app_rev ?reverse (1 2 3 4 5)
+   (??!lambda (result) (display '(??! result))))
+==expands-to==> (display '(1 2 3 4 5))
+
+as expected.
+
+Two more elaborate examples are discussed in [1]. One of them was a
+compile-time implementation of a factorial over Peano-Church
+numerals. No CS paper is complete without working out the
+factorial. Here's the factorial macro itself:
+
+(define-syntax ?plc-fact
+  (syntax-rules ()
+    ((?plc-fact co k)			     ; pattern
+     (?plc-zero? co
+       (??!lambda (c) (?plc-succ (??! c) k)) ; k on c being zero
+       (??!lambda (c)			     ; k on c being non-zero
+	  (?plc-pred (??! c)		     ; the predecessor
+	     (??!lambda (c-1)
+	       (?plc-fact (??! c-1)
+		  (??!lambda (c-1-fact)
+		     (?plc-mul (??! c) (??! c-1-fact) k))))))))))
+
+The form
+(?plc-fact (((( () ))))
+	   (??!lambda (c) (plc-display '(??! c))))
+
+printed, after a slight delay,
+
+The result is: ((((((((((((((((((((((((()))))))))))))))))))))))))
+In other words: 24
+
+The delay was entirely due to compilation (macro-expansion). Once
+compiled, the code printed the answer instantly.
+
+The complete code for the example is given in [1]. This fragment is
+quoted here to illustrate modularity: the factorial "function"
+relies on previously defined macros for arithmetics (?plc-pred,
+?plc-mul) and comparison. Selection forms (such as ?plc-zero?)  take
+several continuation arguments, and apply the result to one of them.
+
+
+* Lambda-calculator as an R5RS macro
+
+In this message, we discuss a more elaborate example: a normal-order
+evaluator for lambda calculus. It is a rather challenging example:
+capture-free substitutions and the repeated identification of the
+left-most redex to reduce are not too trivial. We use the regular
+Scheme notation as the input language for our calculator: in
+particular,
+	 (lambda (x) expr)
+the regular Scheme lambda form, shall represent abstraction in our
+calculus. The example shows an interesting interplay of compile-time
+and run-time lambdas.
+
+First we introduce a few utility re-writing rules:
+
+; cons in CPS
+; ?cons A LST K
+; passes (A . LST) to K
+
+(define-syntax ?cons
+  (syntax-rules ()
+    ((_ x y k)
+     (??!apply k (x . y)))))
+
+; append in CPS
+; ?append LIST1 LIST2 K
+; passes (append LIST1 LIST2) to K
+
+(define-syntax ?append 
+  (syntax-rules ()
+    ((_ () x k)
+     (??!apply k x))
+    ((_  x () k)
+     (??!apply k x))
+    ((_ (x ...) (y ...) k)
+     (??!apply k (x ... y ...)))))
+
+; map in CPS
+; ?map F (X Y ...) K
+; passes ((f X) (f Y) ...) to K
+; Here F is a CPS (syntax) function F X KX that passes (f x) to KX
+
+; The algorithm:
+; map f () => ()
+; map f (x . tail) => (f x . map f tail)
+
+(define-syntax ?map
+  (syntax-rules ()
+    ((_ f () k)
+     (??!apply k ()))
+    ((_ f (x . rest) k)
+     (f x
+      (??!lambda (new-x)
+	 (?map f rest
+	   (??!lambda (new-rest)
+	     (?cons (??! new-x) (??! new-rest) k))))))))
+
+Note that ?map is an example of a higher-order combinator for
+re-writing rules.
+
+Now we can implement a hygienic (i.e., avoiding capture of free
+variables) substitutor.
+
+; ?lc-beta VAR TERM VALUE K
+; passes to K the result of a hygienic substitution of VALUE
+; for VAR in TERM
+; The algorithm is a basic induction on the shape of the TERM
+; We have to be careful only in two cases, where the TERM is
+;  (lambda (var) body) -- in this case var is rebound and the result is
+;			  the term itself
+;  (lambda (var1) body) -- a direct substitution into the body
+;      may capture var1 if it appears free in VALUE.
+;      Therefore, we must first alpha-convert the TERM to replace var1
+;      with a unique variable. To be more precise, we replace var1
+;      with a var1 of a different color. See [3] for generating
+;      colored ids.
+; Note that alpha-conversion of body uses ?lc-beta itself!
+; The algorithm terminates since body is smaller than the original lambda-term
+
+(define-syntax ?lc-beta
+  (syntax-rules ()
+    ((_ var oterm oval ok)
+     (letrec-syntax
+	 ((subs
+	   (syntax-rules (lambda var)
+	     ((_ var val k)
+	      (??!apply k val))
+	     ((_ (lambda (var) body) val k) ; var is shadowed; don't rename
+	      (??!apply k (lambda (var) body)))
+	     ((_ (lambda (var1) body) val k) ; alpha-convert var1 first
+	      (let-syntax		; we use lc-beta itself for alpha-conv
+		  ((uv
+		    (syntax-rules ()
+		      ((_ var1- body- val- k-)
+		       (?lc-beta var1- body- var1
+			  (??!lambda (alpha-converted-body)
+			       (subs (??! alpha-converted-body) val-
+				  (??!lambda (new-body)
+				     (??!apply k-
+					(lambda (var1) (??! new-body))))))))
+		      )))
+		(uv var1 body val k)))
+	     ((_ (x . rest) val k)	; beta-reduce an application
+	      (subs x val		; reduce the head
+		(??!lambda (new-x)
+		  (subs rest val	; then reduce the tail
+		    (??!lambda (new-rest)	; and re-combine them
+	                 (?cons (??! new-x) (??! new-rest) k))))))
+	     ((_ var1 val k)		; var1 is distinct from var
+	      (??!apply k var1))
+	     )))
+       (subs oterm oval ok)))))
+
+
+We should note the modularity of the macro. Curiously, the
+beta-substitutor uses itself to perform an alpha-conversion.
+
+
+Finally, the following re-writing rule is the normal-order lambda-evaluator.
+It tries the leftmost outermost reduction first.
+We rely on the left-associativity of applications:
+If (a b) is not a redex and a is not a pair, we try reducing b
+If (a b) is not a redex and a is a pair (x y), we unfold this
+as (x y b) and repeat.
+
+(define-syntax ?lc-calc
+  (syntax-rules (lambda)
+		; The top-level is a lambda-term: reduce inside
+    ((_ (lambda (var) body) k)
+     (?lc-calc body (??!lambda (new-body)
+		(??!apply k (lambda (var) (??! new-body))))))
+		; The top-most leftmost is a redex
+		; Reduce it and retry from the top
+    ((_ ((lambda (var) body) exp . rest) k)
+     (?lc-beta var body exp
+	       (??!lambda (result)
+			  (?lc-calc ((??! result) . rest) k))))
+		; The topmost is a nested application
+		; Unfold using the associativity rule
+    ((_ ((x) . rest) k) (?lc-calc (x . rest) k))
+    ((_ ((x y . in-rest) . rest) k)
+     (?append (x y . in-rest) rest 
+       (??!lambda (result)
+	  (?lc-calc (??! result) k))))
+		; In topmost (x y z ...), x is not an appl and not an abst
+		; It is equivalent to ((x y) z ...)
+		; Try to reduce y, z, etc. separately
+    ((_ (x y . rest) k)
+     (?map ?lc-calc (y . rest)
+	   (??!lambda (new-args) 
+			  (?cons x (??! new-args) k))))
+		; The topmost is (x) -- remove the extra parens
+    ((_ (term) k) (?lc-calc term k))
+    ((_ var k) (??!apply k var))
+    ))
+
+And this is it.
+
+For example,
+(?lc-calc
+ ((lambda (x) (x x)) (lambda (y) (y z)))
+ (??!lambda (result) (display '(??! result)))
+)
+
+==expands-to==>
+(display '(z z)) 
+
+As a good test of hygiene, we will try expanding
+   (lambda (a) ((lambda (x) (lambda (a) (x a))) a))
+The result is
+    (lambda
+        (a~2397)
+        (lambda (a~5~2398) (a~2397 a~5~2398)))
+
+Note that the inner-most application involves differently colored 
+(i.e., distinct) identifiers. To be sure of that, we take advantage of
+the fact that abstractions in our ?lc-calculus look exactly like
+regular Scheme lambda-forms. Therefore, we can use the Scheme evaluator
+to "run" them.
+
+(?lc-calc
+ (lambda (a) ((lambda (x) (lambda (a) (x a))) a))
+ (??!lambda (result) (write (((??! result) list) 1)))
+)
+
+==expands-to==>
+(write (((lambda
+           (a~2397)
+           (lambda (a~5~2398) (a~2397 a~5~2398)))
+         list)
+        1))
+which, upon evaluation, prints (1). 
+
+
+Finally, we try some arithmetics. Let's try to compute a*(a+b) for a=2
+and b=1:
+
+(?lc-calc 
+ (	; term to expand, an application of...
+  (lambda (a) (lambda (b)  ; lambda-term for a*(a+b)
+     (lambda (f) (a (lambda (x) ((b f) ((a f) x)))))))
+
+  (lambda (f) (lambda (x) (f (f x))))	; Numeral 2, for a
+  (lambda (f) (lambda (x) (f x)))	; Numeral 1, for b
+  )
+ (??!lambda (result) (display '(??! result)))
+)
+
+after some 2 minutes of compilation and 40000+ reduction steps expands into
+
+(display
+  '(lambda
+     (f~7~7107)
+     (lambda
+       (x~21865~24432)
+       (f~7~7107
+         (f~7~7107
+           (f~7~7107
+             (f~7~7107 (f~7~7107 (f~7~7107 x~21865~24432)))))))))
+
+which is the Church numeral for 6. Perhaps this is one of the most
+expensive ways to compute 2*3. I'm constantly working on enhancing
+the complexity.
+
+
+* Related work
+
+Using CPS for writing R5RS macros is not a new idea. In fact, that was
+the impetus for an article "Writing macros in continuation-passing
+style" by Erik Hilsdale and Daniel P. Friedman [5]. The article has
+noted that "The natural way to transform these [CPS] procedures into
+macros is to assume the existence of two macros that behave like
+lambda and apply. ... Unfortunately, it doesn't work because of
+hygiene " and a few other reasons. The article concluded, "So it seems
+we cannot write a macro to express these syntactic continuations." The
+article chose a different way, which turns normally anonymous
+continuation abstractions into regular, named macros. 
+
+We have shown however that anonymous re-writing abstractions are
+possible. The key observation is that we do not assume the existence
+of a macro that behaves like 'lambda'. In our formulation, re-writing
+abstraction is just an expression rather than a macro.
+
+To make comparison of the two approaches clearer, the present and the
+previous [1] articles have implemented examples from Erik Hilsdale's
+paper. In particular, Erik Hilsdale's paper also discusses a
+lambda-evaluator. The code in the paper occupies most of the
+two-column page. In contrast, our evaluator is only 60 lines long; it
+appears easier to write and to comprehend.
+
+Erik Hilsdale's article admitted that their style is "akin to
+programming in an assembly language for macros, where we have given up
+not only all but one control structure (pattern selection) but also
+lexical closures". In this article, we have regained what have been
+lost.
+
+
+* References
+
+[1] "Transparent macro-CPS programming"
+    http://pobox.com/~oleg/ftp/Scheme/syntax-rule-CPS-lambda.txt
+The earlier article posted on comp.lang.scheme on Fri, 30 Nov 2001
+17:24:21 -0800
+
+[2] R. Kelsey, W. Clinger, J. Rees (eds.), Revised5 Report on
+the Algorithmic Language Scheme, J. Higher-Order and
+Symbolic Computation, Vol. 11, No. 1, September, 1998
+	http://www.schemers.org/Documents/Standards/R5RS/
+
+[3] Coloring of identifiers. It was revealing to meditate on the following:
+
+(define-syntax tid-3
+  (syntax-rules ()
+    ((_ x)
+     (let-syntax
+       ((foo
+	 (syntax-rules ()
+	   ((_ y) (lambda (x) y)))))
+       (foo x)))))
+
+(tid-3 a) ; ==expands-to==> (lambda (a~2~3) a)
+
+whereas
+
+(define-syntax tid-31
+  (syntax-rules ()
+    ((_ x)
+     (let-syntax
+       ((foo
+	 (syntax-rules ()
+	   ((_ x y) (lambda (x) y)))))
+       (foo x x)))))
+
+(tid-31 a) ; ==expands-to==>  (lambda (a~3) a~3)
+
+Here a~3 and a~2~3 denote identifier 'a' colored in different
+hues. Differently-colored symbols are distinct when used as variables
+in code.
+
+[4] R5RS, Section 4.3.2  Pattern language 
+http://www.schemers.org/Documents/Standards/R5RS/HTML/r5rs-Z-H-7.html#%_sec_4.3
+
+[5] Erik Hilsdale and Daniel P. Friedman. "Writing macros in
+continuation-passing style". Scheme and Functional Programming 2000.
+September 2000.
+	http://www.ccs.neu.edu/home/matthias/Scheme2000/hilsdale.ps
+
+

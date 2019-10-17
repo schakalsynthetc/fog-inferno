@@ -1,0 +1,2 @@
+#!/! /w/eb/x/fiqh/text/plain/walk
+echo '<pre id="'^$1^'"/00/00/00" class="ls" contentEditable="false">'; ls -l $1

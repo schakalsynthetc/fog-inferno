@@ -1,0 +1,8 @@
+#!/x/00/00/00
+#
+#
+#
+it=$1; shift; t=`{cat $it/t}; ftype=$t(5);
+ 
+{ echo 'page' $it 0.$ftype }
+

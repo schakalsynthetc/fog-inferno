@@ -1,0 +1,12 @@
+#!/ FITH 
+
+64k = 16384 cells
+
+## medium
+
+Keep the ngaro VM binary and the source code for a basic VM within 64k, each can be stored in a slice of the image.
+
+for (i in 0 1 2 3 4 5 6 7 8 9) {mkdir -p dev/$i && touch dev/$i/0}
+
+mkdir -p opcode/0/; for (i in `{seq 0 64}) {touch opcode/0/$i}
+

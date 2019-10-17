@@ -1,0 +1,94 @@
+( casket ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ )
+chain: casket'
+{{
+  variable :options
+---reveal---
+  : KiB            ( n-n ) 1024 * ;
+  : casket:path    ( -$ ) @memory  8 KiB - ;
+  : casket:options ( -$ ) @:options ;
+  : casket:buffer  ( -$ ) @memory 16 KiB - ;
+  : casket:root    ( -$ ) "./" ;
+  : casket:url     ( -$ ) "http://domain.com/path/to/cgi" ;
+  : getRequest     ( -$ )
+    casket:path dup "PATH_INFO" getEnv
+    dup 1+ '/ ^strings'findChar 1+ !:options ;
+}}
+  ( ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ )
+  : Content-type:    ( "- )
+    "Content-type: " getToken ^strings'append "\n\n" ^strings'append
+     keepString .data ` puts ; immediate
+  ( ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ )
+  {{
+    : withBase ( n$q-$ ) [ swap ] dip base &do preserve ;
+    : char ( $-$ )
+      @+ [ 'n = ] [ drop cr      ] when
+         [ '' = ] [ drop '" putc ] when
+         [ '[ = ] [ 27 putc putc ] when
+      putc ;
+    : obj  ( $-$ )
+      @+ [ 'd = ] [ drop [ decimal putn ] withBase ] when
+         [ 'o = ] [ drop [ octal   putn ] withBase ] when
+         [ 'x = ] [ drop [ hex     putn ] withBase ] when
+         [ 'c = ] [ drop swap putc                 ] when
+         [ 's = ] [ drop &puts dip                 ] when
+         [ 'q = ] [ drop &do dip                   ] when
+         [ 'u = ] [ drop casket:url puts           ] when
+      putc ;
+    : complex ( $-n )
+      repeat
+        @+ 0;
+        dup '\ = [ drop char 0 ] ifTrue
+        dup '% = [ drop obj  0 ] ifTrue
+        putc
+      again ;
+  ---reveal---
+    : tputs complex drop ;
+  }}
+  ( ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ )
+  {{
+    create buffer  ( -a )
+      16 1024 * allot
+    : casket:templates ( -$ ) casket:root "templates/" ^strings'append ;
+  ---reveal---
+    : withTemplate ( $- )
+      buffer 0 16 1024 * fill
+      casket:templates ^strings'prepend buffer swap ^files'slurp drop
+      buffer tputs ;
+  }}
+
+: /404
+  Content-type: text/html
+  "<html><body><h1>404</h1></body></html>" tputs cr bye ;
+: /
+  Content-type: text/html
+  "<html><body><h1>casket</h1></body></html>" tputs cr bye ;
+
+: doBeforeDispatch ;
+
+: dispatch
+  doBeforeDispatch
+  getRequest 1+
+  [ @+ [ 0 <> ] [ '/ <> ] bi and ] while 1- 0 swap !
+  casket:path find [ @d->xt do ] [ drop /404 ] if bye ;
+
+{{
+  create bit 5 allot
+  : extract  ( $c-$a ) drop @+ bit ! @+ bit 1+ ! bit ;
+  : render   ( $c-$n )
+    dup '+ = [ drop 32 ] ifTrue
+    dup 13 = [ drop 32 ] ifTrue
+    dup 10 = [ drop 32 ] ifTrue
+    dup '% = [ extract hex toNumber decimal ] ifTrue ;
+  : <decode> (  $-$  ) repeat @+ 0; render ^buffer'add again ;
+---reveal---
+  : decode   (  $-   ) casket:buffer ^buffer'set <decode> drop ;
+}}
+
+: serve: ( """- )
+  getToken dup
+  "/" ^strings'prepend header
+  compiler on
+  keepString .data getToken drop
+  ` Content-type: ` puts ` ; &.word reclass ;
+
+;chain

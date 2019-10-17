@@ -1,0 +1,2 @@
+#!/x/fish/x/!
+~ $#y 0 && pwd || echo $y

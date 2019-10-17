@@ -1,0 +1,2 @@
+#!/x/rc -l
+exec hget http://localhost:18034/index

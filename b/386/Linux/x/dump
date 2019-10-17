@@ -1,0 +1,3 @@
+#!/x/rc
+if (~ $#opts 0) opts=(-Ax -t x1)
+for (file in $*) { echo '#' $file ; od $opts $file ; echo }

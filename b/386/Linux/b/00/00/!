@@ -1,0 +1,49 @@
+#!/b/386/Linux/b/fish/rc
+#
+#
+#
+syshost=Linux; objtype=386; b=$syshost/$objtype; B=b/$b/b;
+P=`{printf '%0.8X' $pid};
+
+left=$1; shift; it=$1; shift; 
+for (t in (b i j l x y)) $t=`{/x/fish/ask/$t}; t=();
+
+fn quit { printf 'quit %s\n' $"*; status=$"*; exit $status }
+
+fn oops { left=$1;shift; it=$1;shift;
+	printf '%s : %s oops : %s ;\n' $"*; 
+	{ test -x /x/fish/oops/$it 
+	} && {. /x/fish/oops/$it $left $* 
+	} || {. /x/fish/oops/x $left $it $*
+}}
+
+fn init { printf 'init %s\n' $"* }
+
+fn eval { left=$1;shift; it=$1;shift;
+	printf '%s : %s eval : %s ;\n' $left $it $"* ;
+	test
+}
+
+fn walk { left=$1; shift; it=$1; shift;
+	printf '%s : %s walk : %s ;\n ' $left $it $right; 
+	{     test -d $it && left=$left^/^$it; it=$1;shift; walk $left $it $* ;
+	} ||{ test -e $it && eval $left $it $* 
+	} ||{ ~ $#* 0 && oops $left absent $it $* }}
+
+{      test -x $1 &&{ 
+	x=$1; shift; status=''; 
+	{. $x $* && quit $x $* || oops $x $* }; exit $status 
+} }||{ test -d $1 &&{ 
+	x=$1; shift; status='';
+	test -f $1/x/init && {fn init {. $x/x/init $*}} ;
+	test -f $1/x/eval && {fn eval {. $x/x/eval $*}} ;
+	test -f $1/x/walk && {fn walk {. $x/x/walk $*}} ;
+	test -f $1/x/quit && {fn quit {. $x/x/quit $*}} ;
+	test -f $1/x/oops && {fn oops {. $x/x/oops $*}} ;
+	{ init $x $* && quit $x $* || oops $x $* }; exit $status;
+}};
+
+# {. -i /dev/stdin};
+
+## -l flag # -c flag # interactive # noninteractive #
+

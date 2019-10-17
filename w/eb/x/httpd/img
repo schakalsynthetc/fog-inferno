@@ -1,0 +1,4 @@
+#!/dis/sh.dis
+if {no $uri} {uri=$*}; or { 
+		run /w/eb/x/img/x $uri 
+}{ echo oops $uri $status }

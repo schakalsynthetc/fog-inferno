@@ -1,0 +1,2 @@
+#!/dis/sh.dis
+{ echo -n 0 }> /tmp/p && cat /w/eb/e/leaf/p

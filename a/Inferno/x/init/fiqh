@@ -1,0 +1,30 @@
+#!/! /x/init/fiqh
+
+load std; load file2chan; 
+
+A=/i/jkl; Q=$A/q/00/00/00;
+
+for (t in (j l m y z)) {and{ ftest -e '#U*'/$t }{ mkdir -p /$t }{ bind -bc '#U*'/$t /$t }}
+
+mkdir -p $A; bind -bc '#U*'/$A $A;
+
+mkdir -p /p/fiqh/;
+mkdir -p /p/fiqh/^(0 1 2); touch /p/fiqh/^(0 1 2)^/m;
+
+# rawdbfs -b -exl -u /y/00/a/fiqh/inferno/chan/stdin/x  /p/fiqh/0/m /p/fiqh/0
+# rawdbfs -b -exl /p/fiqh/0/m /p/fiqh/0
+rawdbfs -b -exl /p/fiqh/1/m /p/fiqh/1
+rawdbfs -b -exl /p/fiqh/2/m /p/fiqh/2
+
+{and{ file2chan /chan/fiqh0 {putrdata} {fetchwdata}
+   }{ file2chan /chan/fiqh1 {putrdata} {fetchwdata > /p/fiqh/1/new}
+   }{ file2chan /chan/fiqh2 {putrdata} {fetchwdata > /p/fiqh/2/new}
+   }{ listen -A 'tcp!*!17115' { sh -i >[2=1] }
+   }{ </chan/fiqh0 \
+      >/chan/fiqh1 \
+      >[2]/chan/fiqh2 { 
+			os -d $A ( $A/b/386/Linux/b/squeak/b -vm-sound-ALSA $A/.image ) 
+			# bug: no test for host platform in squeak call
+	  } 
+}}
+

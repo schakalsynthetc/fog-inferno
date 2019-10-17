@@ -1,0 +1,2 @@
+#!/bin/sh
+/b/386/Linux/b/init/emu -r /y/inferno /x/init/0 alphabet inferno profile &

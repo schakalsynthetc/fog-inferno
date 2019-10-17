@@ -1,0 +1,4 @@
+#!/! /w/eb/w/guide
+
+compiler installs 'name' by writing 'x/http/<name>' entry point
+that calls /w/eb/w/<name>/x/init

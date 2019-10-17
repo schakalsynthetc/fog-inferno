@@ -1,0 +1,28 @@
+#!/! /w/eb/c/httpd/guide
+
+web server
+
+### req modular http for http verb, GET,HEAD,POST, WebDAV? what else?
+### resp modular http, response code is a module ##
+
+### http authentication by ikl ##
+### headers as alphabet ##
+### proxy http requests by /l/ ##
+### modular handling ##
+	plain static file is a module
+	notfound is a module
+### internal proc table for spawn ##
+### server builtin httpd/verb as modules ##
+	manipulate server namespace
+	server fids table
+	z channel table internal
+	cache
+	send javascript to run server-side
+
+### code ##
+	factotum for auth
+	ramfs rawdbfs etc for cache and/or live in-memory tree
+	z channels kernel device
+
+## modular multiprotocol #
+if it isn't an http req it might be something else we understand

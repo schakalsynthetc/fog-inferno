@@ -1,0 +1,10 @@
+#!/dis/sh.dis
+
+m4 (
+	-D__T'='/text/plain/
+	-D__IT'='hello
+	-D__LEFT'='/fiqt/
+	-D__RIGHT'=arg arg arg arrrgh'
+	-D__Q'='/00/0000/00000000
+	-D__IT_DATA'='/fiqt/guide
+) /w/eb/fixfile.m4

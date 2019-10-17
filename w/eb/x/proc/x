@@ -1,0 +1,27 @@
+#!/dis/sh.dis
+
+load std
+
+X=/w/eb/x/proc;
+
+cat $X/head $X/style ;
+
+or {and{
+	echo '<div class="x proc">
+  	<div class="x proc title">processes</div>
+	<table>'
+}{ ifs=' 	';
+	ps | getlines {(pid ppid uid time state size name) := ${split $line};
+		echo ('<tr id="/x/proc/'^$pid^'/t" class="x proc pid">'
+			'<td class="x proc pid">' $pid '</td>'
+			'<td class="x proc ppid">' $ppid '</td>'
+			'<td class="x proc uid">' $uid '</td>'
+			'<td class="x proc time">' $time '</td>'
+			'<td class="x proc state">' $state '</td>'
+			'<td class="x proc size">' $size '</td>'
+			'<td class="x proc name">' $name '</td>'
+		'</tr>')
+	}
+}{
+	echo '</table></div>'
+}} { echo oops /x/proc/ $* }

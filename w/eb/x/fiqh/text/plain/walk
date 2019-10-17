@@ -1,0 +1,2 @@
+#!/! /w/eb/x/fiqh/text/plain/walk
+echo '<pre id="'^$1^'"/00/00/00" class="textEdit" contentEditable="true">'; cat $1

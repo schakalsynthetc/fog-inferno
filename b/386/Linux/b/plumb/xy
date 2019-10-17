@@ -1,0 +1,14 @@
+#!/x/rc -l
+y=$1; x=$2; shift; shift; args=$*;
+today=`{/x/today}; 
+now=`{/x/now};
+
+{ 
+	echo '#' J $today $now X $x $args >> /x/plumb/log
+	$x $args >> $y 
+
+} && { 
+	echo '#' J `{/x/today} `{/x/now} X $x $args Y $y >> /q/plumb/xy/2
+} || { 
+	echo '#' J `{/x/today} `{/x/now} X $x $args N $y $status >> /q/plumb/xy/2
+}

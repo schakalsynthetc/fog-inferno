@@ -1,0 +1,157 @@
+  html, body { height: 99%; }
+
+  body
+  {
+    text-align:center;
+    zoom:1px;
+    background:#222;
+    color:#ccc;
+  }
+
+  #wrap       { min-height: 100%; }
+  #main
+   {
+     overflow:auto;
+     padding-bottom: 50px;
+   }
+
+  #ref, .ref
+   {
+     width: 590px;
+     height: 200px;
+     display: none;
+     -moz-border-radius:4px;
+     -webkit-border-radius:4px;
+     -o-border-radius:4px;
+     -ms-border-radius:4px;
+     -khtml-border-radius:4px;
+     border-radius:4px;
+   }
+
+  #footer
+   {
+     position: relative;
+     border-top: 1px solid #444;
+     margin-top: -50px;
+     height: 50px;
+     clear: both;
+   }
+
+   ul#navlist
+   {
+     margin-left: 0;
+     padding-left: 0;
+     white-space: nowrap;
+   }
+
+  #navlist li
+   {
+     display: inline;
+     list-style-type: none;
+   }
+
+  #navlist a { padding: 3px 10px; }
+  #navlist a:link, #navlist a:visited
+   {
+     color: #fff;
+     background-color: #444;
+     text-decoration: none;
+     -moz-border-radius:4px;
+     -webkit-border-radius:4px;
+     -o-border-radius:4px;
+     -ms-border-radius:4px;
+     -khtml-border-radius:4px;
+     border-radius:4px;
+   }
+
+  #navlist a:hover
+   {
+     color: #000;
+     background-color: #777;
+     text-decoration: none;
+   }
+
+  input
+   {
+     background-color: #777;
+     color: #000;
+     -moz-border-radius:4px;
+     -webkit-border-radius:4px;
+     -o-border-radius:4px;
+     -ms-border-radius:4px;
+     -khtml-border-radius:4px;
+     border-radius:4px;
+     border: 0;
+     font-family: "Monaco", "Courier", "Courier New", monospace;
+     font-style: normal;
+     font-variant: normal;
+     font-weight: normal;
+     font-size: 9pt;
+     line-height: 100%;
+     word-spacing: normal;
+     letter-spacing: normal;
+     text-decoration: none;
+     text-transform: none;
+     text-align: left;
+     text-indent: 0ex;
+   }
+
+  .canvas
+   {
+     background: #777;
+     position: relative;
+     width: 590px;
+     height: 290x;
+     -moz-border-radius:4px;
+     -webkit-border-radius:4px;
+     -o-border-radius:4px;
+     -ms-border-radius:4px;
+     -khtml-border-radius:4px;
+     border-radius:4px;
+   }
+
+   #fbcanvas, .fbcanvas
+   {
+     padding: 0;
+     margin: 0;
+     display: none;
+   }
+
+   table
+   {
+     background: #222;
+     margin: 0px auto;
+   }
+
+   h2, a
+   {
+     color: white;
+   }
+
+  #output
+   {
+     color: white;
+     font-family: "Monaco", "Courier", "Courier New", monospace;
+     font-style: normal;
+     font-variant: normal;
+     font-weight: normal;
+     font-size: 9pt;
+     line-height: 100%;
+     word-spacing: normal;
+     letter-spacing: normal;
+     text-decoration: none;
+     text-transform: none;
+     text-align: left;
+     text-indent: 0ex;
+     width: 590px;
+     height: 290px;
+     overflow: auto;
+     padding: 2px;
+     background:#444;
+     -moz-border-radius:4px;
+     -webkit-border-radius:4px;
+     -o-border-radius:4px;
+     -ms-border-radius:4px;
+     -khtml-border-radius:4px;
+     border-radius:4px;
+   }

@@ -1,0 +1,39 @@
+#!/! /acme/f
+
+acme-fg-text-0='#A0A0A0'
+acme-bg-text-0='#020202'
+
+# button 1 col
+acme-fg-text-1='#C0C0C0'
+acme-bg-text-1='#EEEE9E'
+
+#button 2 col
+acme-fg-text-2='#C0C0C0'
+acme-bg-text-2='#FF2020'
+
+# button 3 col
+acme-fg-text-3='#C0C0C0'
+acme-bg-text-3='#20FF20'
+
+#tags
+acme-fg-tag-0='#44CC00'
+acme-bg-tag-0='#000000'
+
+acme-fg-tag-1='#8888CC'
+acme-bg-tag-1='#000000'
+
+# top of tag border 
+acme-bord-col-0='#000000'
+
+# column separator color
+acme-bord-row-0='#000000'
+
+# separator between tag and text body
+acme-bord-tag-0='#000000'
+
+# scroll bar color bg
+acme-bord-text-0='#202020'
+
+acme-font=/w/font/vera/sans/font
+acme-Font=/w/font/vera/mono/font
+

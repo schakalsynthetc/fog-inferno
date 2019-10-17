@@ -1,0 +1,8 @@
+#!/dis/sh.dis
+it=$1; y=$2; w=$3; {
+	# {test -d $it && { 
+	#	echo '<ul class="ls">'; ls $it | getlines {
+	#		echo '<li>' `{basename $line} '</li>'
+	#	}; echo '</ul>';
+	# }}
+} > /tmp/0/q && cat /w/eb/e/leaf/q

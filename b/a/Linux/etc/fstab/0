@@ -1,0 +1,47 @@
+#!/usr/bin/env m4 
+# /etc/fstab   ## filesystems table ### 
+#
+define(`ROOT',`/l/sd/a/3/b/00/Linux/etc/fstab')dnl
+include(ROOT/t)
+
+## system fstab #
+include(`/etc/fstab')
+
+## /l/ disks #
+DEV(a,0,00) OPTIONS
+DEV(a,1,01) OPTIONS
+DEV(a,2,02) OPTIONS
+DEV(a,3,03) OPTIONS
+DEV(a,4,04) OPTIONS
+
+DEV(b,0,00) OPTIONS
+DEV(b,1,01) OPTIONS
+DEV(b,2,02) OPTIONS
+DEV(b,3,03) OPTIONS
+DEV(b,4,04) OPTIONS
+
+DEV(c,0,00) OPTIONS
+DEV(c,1,01) OPTIONS
+DEV(c,2,02) OPTIONS
+DEV(c,3,03) OPTIONS
+DEV(c,4,04) OPTIONS
+
+DEV(d,0,00) OPTIONS
+DEV(d,1,01) OPTIONS
+DEV(d,2,02) OPTIONS
+DEV(d,3,03) OPTIONS
+DEV(d,4,04) OPTIONS
+
+DEV(e,0,00) OPTIONS
+DEV(e,1,01) OPTIONS
+DEV(e,2,02) OPTIONS
+DEV(e,3,03) OPTIONS
+DEV(e,4,04) OPTIONS
+
+DEV(f,0,00) OPTIONS
+DEV(f,1,01) OPTIONS
+DEV(f,2,02) OPTIONS
+DEV(f,3,03) OPTIONS
+DEV(f,4,04) OPTIONS
+
+# /etc/fstab ####### 

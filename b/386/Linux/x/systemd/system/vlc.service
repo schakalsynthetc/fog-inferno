@@ -1,0 +1,13 @@
+[Unit]
+Description=vlc
+After=network.targets
+
+[Service]
+Type=forking
+User=nobody
+ExecStart=/usr/bin/cvlc --intf=lua --lua-intf=http --daemon --http-port=8090
+Restart=on-abort
+
+[Install]
+WantedBy=multi-user.target
+

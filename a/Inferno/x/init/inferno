@@ -1,0 +1,26 @@
+# /x/init/inferno/ 
+
+bind -a '#C' /
+here='#U*'
+
+or{ ftest -e /net/dns }{ ftest -e /env/emuhost }{ ndb/dns }
+or{ ftest -e /net/cs  }{ ndb/cs }
+
+or {ftest -f /mnt/registry/new} {
+  db=()
+  and {ftest -f /n/db/registry} {db=(-f /n/db/registry)}
+  mount -A -c {ndb/registry $db} /mnt/registry
+}
+
+listen -v 'tcp!*!registry' {export /mnt/registry &}	# -n?
+
+and{ mkdir -p /n/db 
+  }{ bind -c $here/n/db /n/db 
+and{ mkdir -p /n/et 
+  }{ bind -c $here/n/et /n/et
+  }{ bind -a /net /n/et }}
+
+# moved to systemd
+# listen -A 'tcp!*!17198'     { echo '#!/inferno/fish/!' $netdir '' ; sh -i }
+# styxlisten -A 'tcp!*!17199' { export / }
+# styxlisten -A 'tcp!*!17190' export /0/ }

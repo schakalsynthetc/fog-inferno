@@ -1,0 +1,11 @@
+[Unit]
+Description=alphabet
+
+[Service]
+Type=oneshot
+User=root
+ExecStart=/b/386/Linux/x/init/alphabet
+
+[Install]
+WantedBy=multi-user.target
+

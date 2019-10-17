@@ -1,0 +1,28 @@
+#!/dis/sh.dis
+
+load std
+
+if {~ $uri '/play'} { x=(play) } 
+if {~ $uri '/stop'} { x=(stop) }
+if {~ $uri '/reset'} { x=(reset) }
+if {~ $uri '/locate'} { x=(locate $q) }
+
+os /x/jack/transport $x
+
+echo '
+<html> <head> <title>/x/jack</title>
+<meta name="viewport" content="width=device-width"/>
+<link rel="stylesheet" href="/style.css"/> </head>
+<body>
+'
+
+echo '<ul>'
+os /x/jack/ls | getlines {
+	echo '<li>' $line '</li>'
+}
+echo '</ul>'
+
+echo '
+</body>
+</html>
+'

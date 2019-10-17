@@ -1,0 +1,14 @@
+# fiqh/chan/write
+now=`{date -n}; P=/p/fiqh/$now;  echo '# fiqh channel write' $P
+
+fn ok { echo '#!/!' $P/t quit > $P/t; echo $P/t quit > /dev/hoststderr }
+fn oops { echo '#!/!' $P/t oops > $P/t; echo $P/t oops >/dev/hoststderr }
+
+and{ mkdir -p $P;
+  }{ echo '#!/! '^$P^'/t init' > $P/t;
+  }{ t=`{read}; echo $t 'eval' > $P/t;
+	 if {~ $t '#!/!'*} { 
+		{sh -i > $P/1 >[2] $P/2} && ok || oops 
+     }{ cat > $P/1 }
+  }{ 
+  }

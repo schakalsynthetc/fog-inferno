@@ -1,0 +1,174 @@
+#!/! /b/dis/e/guide
+
+## types # { types=(byte word int big real string array list object chan);
+
+	{ for t0 in $types { for t1 in $types { mkdir -p $t0/of/$t1 }}}
+}
+
+### conversions
+  2F cvtbw  	byte 	word
+  30 cvtwb      	word  	byte
+  31 cvtfw       	float    	word
+  32 cvtwf      	word    	float
+  33 cvtca     	string  	array
+  34 cvtac     	array    	string
+  35 cvtwc     	word    	string
+  36 cvtcw   	string   	word
+  37 cvtfc    	float  	string
+  38 cvtcf         	string     	float
+  87 cvtlf
+  88 cvtfl
+  89 cvtlw
+  8A cvtwl
+  8B cvtlc
+  8C cvtcl
+  95 cvtrf
+  96 cvtfr
+  97 cvtws
+  98 cvtsw
+
+## opcodes # 
+{ 
+	| for e in `{ls ??/r}{ echo `{basename -d $e} `{cat $e} }
+(
+00 nop
+01 alt
+02 nbalt
+03 goto
+04 call
+05 frame
+06 spawn
+07 runt
+08 load
+09 mcall
+0A mspawn
+0B mframe
+0C ret
+0D jmp
+0E case
+0F exit
+10 new
+11 newa
+12 newcb
+13 newcw
+14 newcf
+15 newcp
+16 newcm
+17 newcmp
+18 send
+19 recv
+1A consb
+1B consw
+1C consp
+1D consf
+1E consm
+1F consmp
+20 headb
+21 headw
+22 headp
+23 headf
+24 headm
+25 headmp
+26 tail
+27 lea
+28 indx
+29 movp
+2A movm
+2B movmp
+2C movb
+2D movw
+2E movf
+39 addb
+3A addw
+3B addf
+3C subb
+3D subw
+3E subf
+3F mulb
+40 mulw
+41 mulf
+42 divb
+43 divw
+44 divf
+45 modw
+46 modb
+47 andb
+48 andw
+49 orb
+4A orw
+4B xorb
+4C xorw
+4D shlb
+4E shlw
+4F shrb
+50 shrw
+51 insc
+52 indc
+53 addc
+54 lenc
+55 lena
+56 lenl
+57 beqb
+58 bneb
+59 bltb
+5A bleb
+5B bgtb
+5C bgeb
+5D beqw
+5E bnew
+5F bltw
+60 blew
+61 bgtw
+62 bgew
+63 beqf
+64 bnef
+65 bltf
+66 blef
+67 bgtf
+68 bgef
+69 beqc
+6A bnec
+6B bltc
+6C blec
+6D bgtc
+6E bgec
+6F slicea
+70 slicela
+71 slicec
+72 indw
+73 indf
+74 indb
+75 negf
+76 movl
+77 addl
+78 subl
+79 divl
+7A modl
+7B mull
+7C andl
+7D orl
+7E xorl
+7F shll
+80 shrl
+81 bnel
+82 bltl
+83 blel
+84 bgtl
+85 bgel
+86 beql
+8D headl
+8E consl
+8F newcl
+90 casec
+91 indl
+92 movpc
+93 tcmp
+94 mnewz
+99 lsrw
+9A lsrl
+9B eclr
+9C newz
+9D newaz
+
+
+)}

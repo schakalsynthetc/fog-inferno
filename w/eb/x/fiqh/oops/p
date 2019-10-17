@@ -1,0 +1,3 @@
+cat: cannot open /usr/jkl/blargl: '/usr/jkl/blargl' file does not exist
+sh: shift: './shift' file does not exist
+sh: </pre></td>: '/dis/<' file name syntax

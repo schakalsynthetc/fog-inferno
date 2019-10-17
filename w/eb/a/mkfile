@@ -1,0 +1,12 @@
+#
+#
+#
+#
+
+index.html: a 0 
+	markdown < 0 > 0.html
+	m4 a > index.html
+	rm 0.html
+
+index:V: index.html
+

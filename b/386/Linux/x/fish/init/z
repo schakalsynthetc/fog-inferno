@@ -1,0 +1,18 @@
+#!/x/rc -l
+it=`{printf '%0.8X' $pid};
+
+fn mount { mkdir -p $2 && 9pfuse 'unix!'^$1 $2; }
+
+{for (t in p q r o) { 
+	mkdir /z/fish/$it/$t; 
+}}
+
+{ NAMESPACE=/z/fish/$it;
+	hubfs -s p; mount /z/fish/$it/p /x/fish/p/$it; touch /x/fish/p/$it/ctl;
+	ramfs -s q; mount /z/fish/$it/q /x/fish/q/$it; echo 0 > /x/fish/q/$it/q;
+	ramfs -s r; mount /z/fish/$it/r /x/fish/r/$it; echo 0 > /x/fish/r/$it/q;
+	test -f /z/fish/z/plumb ||{ NAMESPACE=/z/fish/z plumber };
+	mount /z/fish/z/plumb /x/fish/o/$it;
+	# ramfs -s w; mount /z/fish/$it/w /x/fish/w/$it;
+}
+fn mount;

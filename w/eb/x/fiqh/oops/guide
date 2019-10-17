@@ -1,0 +1,5 @@
+#!/! /w/eb/x/fiqh/oops/guide
+
+the process may go errant at any one of many walk,eval cycles
+when the process oopses the functions in 'oops' take over by exec
+

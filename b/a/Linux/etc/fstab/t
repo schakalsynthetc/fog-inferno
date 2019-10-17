@@ -1,0 +1,3 @@
+#!/! /b/00/Linux/etc/fstab/t
+define(`OPTIONS',`auto noauto,exec,user,rw 0 1')dnl
+define(`DEV',`/dev/sd$1$2 /l/00/0$2/$3')dnl

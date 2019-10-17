@@ -1,0 +1,62 @@
+#!/! /x/00/00/guide
+
+{ for (x in (/x/y/y /x/y/t /x/y/x /x/y/p /x/y/q /x/y/r /x/y/w)) {
+	mkdir -p $x;
+	for (xx in (00 01 02 x)) {
+		test -f $x/$xx || printf '#!/x/fish/x/!\n' > $x/$xx; 
+		chmod 777 $x/$xx;
+	}
+	test -f $x/t || printf '#!/! %s/t\n' $x > $x/t; chmod 777 $x/t;
+}}
+
+{
+/x/alphabet
+/x/android
+/x/cam
+/x/ccrma
+/x/changes2fourC
+/x/clone
+/x/dump
+/x/feh
+/x/fiqh
+/x/fish
+/x/flac
+/x/flow
+/x/fluid
+/x/fog
+/x/functions
+/x/hello
+/x/hubfs
+/x/inferno
+/x/jack
+/x/keyword
+/x/linux
+/x/log
+/x/melt
+/x/midi
+/x/mime
+/x/mkguide
+/x/mp4
+/x/ndate
+/x/now
+/x/plan9
+/x/plumb
+/x/profile
+/x/ramfs
+/x/rc
+/x/relate
+/x/scheme
+/x/see
+/x/sndfile
+/x/sox
+/x/tickdown
+/x/today
+/x/vac
+/x/venti
+/x/vlc
+/x/vnc
+/x/x
+/x/xml
+/x/y
+
+}

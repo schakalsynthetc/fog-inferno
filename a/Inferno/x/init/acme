@@ -1,0 +1,3 @@
+#!/! /x/init/acme
+
+acme -a $home $home/README 

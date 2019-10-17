@@ -1,0 +1,5 @@
+{ i=`{cat /dev/user}; 
+	bind /usr/$i /i/$i; bind -bc '#U*'/i/$i /i/$i ||{} ; cd /i/$i; 
+
+}; sh -i >/dev/hoststdout >[2]/dev/hoststderr ; 
+

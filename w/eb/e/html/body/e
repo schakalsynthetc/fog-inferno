@@ -1,0 +1,4 @@
+<body class="Xt" onload="init()"> 
+include(__Y)dnl
+</body> 
+<script type="text/javascript"> include(ROOT`/e/html/body/c')dnl </script> 

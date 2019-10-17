@@ -1,0 +1,8 @@
+#!/! /w/eb/x/img/x 
+
+(argv):=$*;
+X=/w/eb/x/img;
+
+if {ftest -e $argv}{
+		m4 -D__IT__'='$argv $X/see.html
+}{ echo oops absent $argv }

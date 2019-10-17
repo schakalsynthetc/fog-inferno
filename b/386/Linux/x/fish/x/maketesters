@@ -1,0 +1,9 @@
+#!/x/rc
+here=/x/0
+
+names=('directory?' 'dir?' 'exec?' 'file?' 'extant?')
+flags=(d d x f e)
+code='#!/x/rc\nit=$1; shift; right=$*; exec test -%s $it\n'
+for (i in `{index names}) {
+	printf $code $flags($i) > $here/$names($i) && chmod 777 $here/$names($i)
+}

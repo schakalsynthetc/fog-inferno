@@ -1,0 +1,15 @@
+#!/! w/eb/x/profile
+
+echo '#!/w/eb/! t'
+echo -n '       '
+
+for it in $alphabet {
+	and {test -d /$it
+	 }{ mkdir -p /w/eb/$it
+	 }{ bind -ac /$it /w/eb/$it
+	 }{ echo -n $it '' }
+}
+
+bind /w/eb /services/httpd/root
+bind /w/eb/x/httpd /dis/svc/httpd
+

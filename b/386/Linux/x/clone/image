@@ -1,0 +1,19 @@
+#!/x/rc -l
+
+qs=`{seq 0 256}
+
+for (q in $qs) { 
+	/x/clone/point 8192 8 $q 
+}
+for (i in A B C D E F) { 
+	/x/clone/point $i 8192 8 
+}
+for (x in Q R) {
+	/x/clone/point $x/0 8192 8
+}
+for (x in W X Y) {
+	/x/clone/point $x/0 8192 8 
+}
+
+
+/x/clone/point poo 8192 8

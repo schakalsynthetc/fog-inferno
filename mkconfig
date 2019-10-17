@@ -1,0 +1,10 @@
+# In limbo mk none of this is actually used.
+ROOT=/
+
+SYSHOST=Linux
+SYSTARG=Linux
+OBJTYPE=arm		
+
+#OBJDIR=$OBJTYPE/$SYSTARG
+#<$ROOT/mkfiles/mkhost-$SYSHOST			# variables appropriate for host system
+#<$ROOT/mkfiles/mkfile-$SYSTARG-$OBJTYPE	# variables used to build target object type

@@ -1,0 +1,8 @@
+## Overview
+This library provides support for additional mathmatic operations not provided
+by the core Retro language.
+
+## Functions
+| squareRoot | x-n   | Find an (approximate) square root for a given value |
+| gcd        | xy-n  | Find the greatest common denominator for two values |
+| lcm        | xy-n  | Find the least common multiplier for two values     |

@@ -1,0 +1,107 @@
+  html, body { height: 99%; }
+  #wrap       { min-height: 100%; }
+  #main
+   {
+     overflow:auto;
+     padding-bottom: 50px;
+   }
+
+  #ref, .ref
+   {
+     background: #ababab;
+     color: black;
+     width: 590px;
+     height: 200px;
+     display: none;
+   }
+
+  #footer
+   {
+     position: relative;
+     border-top: 1px solid white;
+     margin-top: -50px;
+     height: 50px;
+     clear: both;
+   }
+
+   ul#navlist
+   {
+     margin-left: 0;
+     padding-left: 0;
+     white-space: nowrap;
+   }
+
+  #navlist li
+   {
+     display: inline;
+     list-style-type: none;
+   }
+
+  #navlist a { padding: 3px 10px; }
+  #navlist a:link, #navlist a:visited
+   {
+     color: #fff;
+     background-color: #a63e00;
+     border: 1px solid white;
+     text-decoration: none;
+   }
+
+  #navlist a:hover
+   {
+     color: #black;
+     background-color: white;
+     text-decoration: none;
+   }
+
+   body
+   {
+     background: black;
+   }
+
+  .canvas
+   {
+     background: #888888;
+     position: relative;
+     width: 590px;
+     height: 290x;
+   }
+
+   #fbcanvas, .fbcanvas
+   {
+     padding: 0;
+     margin: 0;
+     display: none;
+   }
+
+   table
+   {
+     background: #000 repeat;
+     margin: 0px auto;
+   }
+
+   h2, a
+   {
+     color: white;
+   }
+
+  #output
+   {
+     color: white;
+     font-family: "Monaco", "Courier", "Courier New", monospace;
+     font-style: normal;
+     font-variant: normal;
+     font-weight: normal;
+     font-size: 9pt;
+     line-height: 100%;
+     word-spacing: normal;
+     letter-spacing: normal;
+     text-decoration: none;
+     text-transform: none;
+     text-align: left;
+     text-indent: 0ex;
+     width: 590px;
+     height: 290px;
+     overflow: auto;
+     background: #424242;
+     padding: 2px;
+   }

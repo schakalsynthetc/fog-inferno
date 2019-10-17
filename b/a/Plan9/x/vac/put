@@ -1,0 +1,17 @@
+#!/x/rc 
+
+{~ $#* 0 && it=`{pwd} || it=$1}
+
+y=`{cleanname -d `{pwd} $it};
+
+{score=`{vac $y}} && {
+	hash=`{echo $score |sed 's/vac://'}
+	mkdir -p /h/vac/$hash/r
+	{
+		echo '#!/!' /h/vac/$hash/t `{cleanname $y}
+	}> /h/vac/$hash/t;
+	date -n > /h/vac/$hash/j;
+	cat /dev/sysname > /h/vac/$hash/l;
+	cleanname $y > /h/vac/$hash/y
+	echo /h/vac/$hash/ `{cleanname $y}
+}

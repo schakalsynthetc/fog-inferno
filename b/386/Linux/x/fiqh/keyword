@@ -1,0 +1,33 @@
+#!/x/rc -l
+
+x=x
+
+fn zero { printf '0 ' }
+
+fn unit { printf '%s ' $1 }
+
+fn prefix { printf '%s:%s; ' $1 $2 }
+fn postfix { printf '%s %s ' $2 $1 }
+fn infix { printf '%s /%s/ %s ' $1 $2 $3 }
+
+fn vector {
+	{ left=$1; x=$2; shift 2 }; c=$#*;
+	printf '%s /%s/ %dv, %s' $left $x $c $1
+	shift
+	printf ', %s' $*
+	printf ' '
+}
+
+fn dispatch { 
+	switch ($#*) {
+	case 3
+		infix $1 $2 $3
+	case 2 
+		prefix $1 $2
+	case 1 
+		unit $1
+	case 0 
+		zero
+	case * 
+		vector $*
+}}

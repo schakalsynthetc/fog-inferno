@@ -1,0 +1,3 @@
+#!/x/rc -l
+here=/b/386/Linux/b
+exec $here/fog/0 -plugins $here/fog $*

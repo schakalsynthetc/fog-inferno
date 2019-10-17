@@ -1,0 +1,4 @@
+#!/dis/sh.dis
+it=$1; y=$2; w=$3; {
+	echo '<a class="leaf" href="/x/leaf/'^$it^'">' `{basename $it} '</a>' ;
+} > /tmp/t && cat /w/eb/e/leaf/t

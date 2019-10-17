@@ -1,0 +1,68 @@
+<$ROOT/mkconfig
+
+TARG=	cache.dis\
+	contents.dis\
+	date.dis\
+	echo.dis\
+	httpd.dis\
+	imagemap.dis\
+	parser.dis\
+	redirect.dis\
+	stats.dis\
+	alarms.dis\
+	cgiparse.dis\
+
+MODULES=\
+	cache.m\
+	contents.m\
+	date.m\
+	httpd.m\
+	parser.m\
+	redirect.m\
+	alarms.m\
+	cgiparse.m\
+
+SYSMODULES=
+
+LOGS=	debug\
+	httpd\
+
+DISBIN=/w/eb/x/httpd
+LOGDIR=/w/eb/j/log
+MODDIR=/w/eb/a/httpd
+
+BINTARG=${TARG:%=$DISBIN/%}
+SYS_MODULE=${SYSMODULES:%=$MODDIR/%}
+LIMBOFLAGS=-I. -I$MODDIR
+
+all:V:		$TARG
+
+install:V:	$BINTARG
+
+installall:V:	install
+
+clean:V: 	clean-std
+
+nuke:V:		nuke-std
+
+$DISBIN/%.dis:	%.dis
+	rm -f $DISBIN/$stem.dis && cp $stem.dis $DISBIN/$stem.dis
+	ftest -f $stem.m && cp $stem.m /w/eb/a/httpd/$stem.m
+
+%.dis:		$MODULES $SYS_MODULE
+
+%.dis:		%.b
+	limbo $LIMBOFLAGS -gw $stem.b
+
+%.s:		%.b
+	limbo $LIMBOFLAGS -w -G -S $stem.b
+
+%.install:V:	$DISBIN/%.dis
+
+%.installall:V:	$DISBIN/%.dis
+
+clean-std:V:
+	rm -f *.dis *.sbl
+
+nuke-std:V:	clean-std
+	cd $DISBIN; rm -f $TARG

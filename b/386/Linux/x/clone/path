@@ -1,0 +1,3 @@
+#!/x/rc 
+exec mkdir -p $1
+

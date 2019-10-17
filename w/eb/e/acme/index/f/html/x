@@ -1,0 +1,6 @@
+#!/! /w/eb/e/acme/index/f/html/x
+
+</mnt/acme/index getlines {
+	(wid p0 p1 pee poo tag) := $line ;
+	echo '<
+}

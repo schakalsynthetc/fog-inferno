@@ -1,0 +1,8 @@
+#!/x/rc
+P=$1;shift;OOPS=$*; 
+
+{~ $#OOPS 0
+	} && { printf '  :quit: %s ;\n' $P >> /fiqh/p/guide ;
+	} || { printf '  :quit: %s :oops: %s ;\n' $P $"OOPS >> /fiqh/p/guide ; 
+} 
+

@@ -1,0 +1,11 @@
+#!/x/00/00/00
+#
+#
+#
+Y=/i/jkl/fog/inferno; ROOT=/i/jkl/fog/inferno;
+
+{~ $syshost 'Inferno' }&&{ exec echo '---' x/init/x/init hello inferno '--' }
+
+~ $1 '/x/00/00/fog' && shift ; 
+
+exec $Y/$B/emu -r $Y /a/Inferno/x/init/init $*

@@ -1,0 +1,21 @@
+ROOT=.
+
+A=/a/0/0
+B=$ROOT/b
+C=$ROOT
+CORE=/c/0/0
+ZERO=/boot
+
+CC=cc
+
+b: $C/ngaro.c
+	$CC -o $B $C/ngaro.c
+
+image: $A $B $CORE
+	$B --image $A --with $CORE > /dev/null
+
+zero: $A $B $CORE 
+	dd if=/dev/zero of=$ZERO/0 bs=8192 count=2048
+	dd if=$B of=$ZERO/0 bs=8192 || true
+	dd if=$A of=$ZERO/0 bs=8192 seek=8 || true
+	# $ZERO/0 --image $ZERO/0 --with $CORE > /dev/null 

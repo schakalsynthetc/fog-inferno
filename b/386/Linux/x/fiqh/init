@@ -1,0 +1,32 @@
+#!/x/rc -l
+#
+#
+#
+syshost=Linux
+objtype=386
+if (~ $#a 0) a=/0
+A=$a
+B=/b/$objtype/$syshost/b/fog
+now=`{date -n}
+P=$a/fiqh/$pid/$now
+opts=(-plugins $B -vm-sound-alsa $opts)
+
+NAMESPACE=$P/z
+Z=$NAMESPACE
+
+mkdir -p $P $Z
+
+go=($B/0 $opts $A/.image $*)
+
+printf '#!/Xt fiqh/%dp%dj/hello !#######\n\n' $pid $now
+
+cd $a && {{
+	{factotum &}
+	{plumber &}
+
+	printf '0 p: %d x: [ ' $pid
+	printf '%s, ' $go
+	printf '] go.\n\n' 
+}; exec $go >[2] $P/err } || { 
+	printf '    oops no go: %s ; \n' $"go 
+}

@@ -1,0 +1,1 @@
+'From Squeak5.0 of 6 August 2015 [latest update: #15113] on 21 April 2019 at 4:07:16 pm'!IoUnit subclass: #IoUnitFixed	instanceVariableNames: ''	classVariableNames: ''	poolDictionaries: ''	category: 'fish'!

@@ -1,0 +1,15 @@
+#!/dis/sh.dis
+load std
+
+if { no $x || ~ $x 'table' }{
+	echo '<table>'; ls $uri | getlines {
+		echo '<tr><td><a href="/x/tree/'^$line^'?x=go">' $line '</a></td></tr>' 
+	}; echo '</table>'
+ }{ ~ $x 'go'} {
+	if {test -f $uri} {
+		if {no $f }{ cat $uri
+		 }{ test -x /w/eb/f/$f/x }{ <$uri run /w/eb/f/$f/x
+		 }{ echo OOPS }
+	}{ test -d $uri} {x=table; run /w/eb/x/httpd/tree
+	}{ echo OOPS ABSENT $uri }
+ }{ echo OOPS UKNOWN X $x }

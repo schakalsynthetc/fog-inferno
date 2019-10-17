@@ -1,0 +1,3 @@
+#!/! /w/eb/c/lib/guide
+
+bind -b /w/eb/a/httpd /module

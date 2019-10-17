@@ -1,0 +1,2 @@
+#!/x/rc
+it=$1; shift; right=$*; exec test -f $it

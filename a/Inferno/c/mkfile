@@ -1,0 +1,5 @@
+</mkconfig
+
+DIRS=charon cmd acme grid \
+	lib mapreduce math svc
+

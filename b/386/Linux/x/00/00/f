@@ -1,0 +1,2 @@
+#!/x/rc
+fmt=$1; test -f /f/00/00/00/$1 && fmt=`{cat /f/00/00/00/$1}; shift; exec printf $fmt $*

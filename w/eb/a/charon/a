@@ -1,0 +1,21 @@
+#!/! /w/eb/a/charon/a
+
+build
+charon
+chutils
+common
+cookiesrv
+ctype
+date
+event
+gui
+img
+layout
+lex
+mkfile
+paginate
+script
+transport
+transport/http
+transport/ftp
+url

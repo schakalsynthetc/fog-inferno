@@ -1,0 +1,13 @@
+#!/x/rc -l
+
+cpio=(bsdcpio);
+
+fn list { {
+	printf '#!/! %s/t\n\n' `{pwd}
+	$cpio -it < m | sed 's/\.\///' | awk '{print "  "$0" "}'
+} > t && cat t }
+
+fn get { @{cd y && $cpio -i < ../m} }
+fn put { @{cd y && find . | $cpio -o -y > ../m.new && mv ../m.new ../m}}
+
+$*

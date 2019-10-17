@@ -1,0 +1,2 @@
+#!/dis/sh.dis
+echo fiqh stdout update `{date -n} $*

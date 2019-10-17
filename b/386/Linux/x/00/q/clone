@@ -1,0 +1,8 @@
+#!/x/rc
+#
+#
+#
+y=`{pwd}; it=`{printf '%0.2X/%0.2X/%0.2X/%0.8X/%0.8X/%0.8X' $1 $2 $3 $4 $5 $6};
+
+mkdir -p $it; {test -f $it/t ||{ printf '#!/! %s/%s/t\n' $y $it > $it/t; chmod 777 $it/t;}}
+echo q /$it/ t 
